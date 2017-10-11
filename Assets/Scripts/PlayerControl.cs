@@ -8,16 +8,29 @@ public class PlayerControl : MonoBehaviour {
     public Animator playerAnime;
     public bool isTurning = false;
     Transform pivot;
+    bool isTalking = false;
 
-	// Use this for initialization
-	void Start () {
+    StatueControl currStatue = null;
+    // Use this for initialization
+    void Start () {
         pivot = this.transform.Find("Pivot");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Move();
-	}
+        if (currStatue != null && Input.GetKeyDown(KeyCode.X)) {
+            if (!isTalking) {
+                isTalking = true;
+                currStatue.Interact();
+            } else {
+                isTalking = false;
+                currStatue.Close();
+            }
+        }
+        
+        if(!isTalking)
+            Move();
+    }
 
     void Move() {
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -33,5 +46,17 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.UpArrow))
             this.GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.tag == "Statue") {
+            currStatue = other.GetComponent<StatueControl>();
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if (other.tag == "Statue") {
+            currStatue = null;
+        }
     }
 }

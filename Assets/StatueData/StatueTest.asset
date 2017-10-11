@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
+  m_Name: StatueTest
+  m_EditorClassIdentifier: 
+  title: Statue1
+  normalMessage: Testando... 1... 2... 3
+  emojiMessage: none
+  normalFont: {fileID: 12800000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
+  emojiFont: {fileID: 0}
