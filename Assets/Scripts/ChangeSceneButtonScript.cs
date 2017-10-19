@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayButtonScript : MonoBehaviour {
+public class ChangeSceneButtonScript : MonoBehaviour {
 	private Button b;
+	[SerializeField]
+	public string scene;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +16,6 @@ public class PlayButtonScript : MonoBehaviour {
 	}
 
 	void ChangeScene(){
-		SceneManager.LoadScene ("GameTest", LoadSceneMode.Single);
+		SceneManager.LoadScene (scene, LoadSceneMode.Single);
 	}
 }
