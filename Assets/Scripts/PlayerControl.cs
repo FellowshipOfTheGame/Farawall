@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
+    public float lastTurn = 0.0f;
     public float speed, turnTime;
     public Animator playerAnime;
     public bool isTurning = false;
     Transform pivot;
     bool isTalking = false;
+    public int[] wallDetect;
+    public bool nearWall = false;
+    public LayerMask wallLayer;
 
     StatueControl currStatue = null;
     // Use this for initialization
     void Start () {
+        wallDetect = new int[4];
         pivot = this.transform.Find("Pivot");
 	}
 	
@@ -33,14 +38,28 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Move() {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            playerAnime.SetTrigger("TurnBack");
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            Vector3 dir = Quaternion.Euler(pivot.eulerAngles + new Vector3(0.0f, 90.0f, 0.0f)) * Vector3.forward * 0.8f;
+            if (Physics.OverlapSphere(this.transform.position - dir, 0.3f, wallLayer).Length == 0)
+                playerAnime.SetTrigger("TurnBack");
+            else
+                playerAnime.SetTrigger("TurnBack2");
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+            lastTurn = 180.0f;
+            isTurning = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
             playerAnime.SetTrigger("TurnRight");
+            lastTurn = 90.0f;
+            isTurning = true;
+        }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             playerAnime.SetTrigger("TurnLeft");
+            lastTurn = -90.0f;
+            isTurning = true;
+        }
 
        Vector3 direction = Quaternion.Euler(pivot.Find("PlayerModel").eulerAngles) * Vector3.forward;
 
