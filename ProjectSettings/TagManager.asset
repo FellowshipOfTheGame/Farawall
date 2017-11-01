@@ -9,6 +9,7 @@ TagManager:
   - Animal
   - Arrow
   - UltraArrow
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -22,6 +23,11 @@ TagManager:
   - Enemy
   - Background
   - Arrow
+  - Wall
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
