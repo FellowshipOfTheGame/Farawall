@@ -13,8 +13,9 @@ public class PlayerControl : MonoBehaviour {
     public int[] wallDetect;
     public bool nearWall = false;
     public LayerMask wallLayer;
+    public bool canTranslate = false;
 
-    StatueControl currStatue = null;
+    Interactable currInter = null;
     // Use this for initialization
     void Start () {
         wallDetect = new int[4];
@@ -23,13 +24,13 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (currStatue != null && Input.GetKeyDown(KeyCode.X)) {
+        if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
             if (!isTalking) {
                 isTalking = true;
-                currStatue.Interact();
+                currInter.Interact();
             } else {
                 isTalking = false;
-                currStatue.Close();
+                currInter.Close();
             }
         }
         
@@ -68,14 +69,14 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "Statue") {
-            currStatue = other.GetComponent<StatueControl>();
+        if (other.tag == "Interactable") {
+            currInter = other.GetComponent<Interactable>();
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.tag == "Statue") {
-            currStatue = null;
+        if (other.tag == "Interactable") {
+            currInter = null;
         }
     }
 }
