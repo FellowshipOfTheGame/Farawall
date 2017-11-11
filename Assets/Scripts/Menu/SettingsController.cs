@@ -5,21 +5,23 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour {
 	public Toggle fullScreen;
-	public Dropdown resolution;
+	public Dropdown resolutionOption;
 	public Dropdown textureQuality;
 	public Slider volume;
 
 	public Resolution[] resolutions;
+	public AudioSource musicSource;
 
-
-	void OnEnable(){
-
+	void Start(){
 		fullScreen.onValueChanged.AddListener (delegate { OnFullScreenToggle();});
-		resolution.onValueChanged.AddListener (delegate { OnResolutionChange();});
+		resolutionOption.onValueChanged.AddListener (delegate { OnResolutionChange();});
 		textureQuality.onValueChanged.AddListener (delegate { OnTextureQualityChange();});
 		volume.onValueChanged.AddListener (delegate {OnVolumeChange();});
 
 		resolutions = Screen.resolutions;
+		foreach (Resolution resolution in resolutions) {
+			resolutionOption.options.Add (new Dropdown.OptionData(resolution.ToString()));
+		}
 	}
 
 	public void OnFullScreenToggle(){
@@ -31,10 +33,10 @@ public class SettingsController : MonoBehaviour {
 	}
 
 	public void OnResolutionChange(){
-
+		Screen.SetResolution (resolutions[resolutionOption.value].width, resolutions[resolutionOption.value].height, Screen.fullScreen);
 	}
 
 	public void OnVolumeChange(){
-
+		musicSource.volume = volume.value;
 	}
 }

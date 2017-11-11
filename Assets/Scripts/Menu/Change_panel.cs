@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Change_panel : MonoBehaviour {
 	[SerializeField]
-	private GameObject firstPanel;
+	private bool isOnFirstPanel;
 	[SerializeField]
 	private GameObject nextPanel;
 	[SerializeField]
@@ -14,7 +14,7 @@ public class Change_panel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (currentPanel != firstPanel)
+		if (!isOnFirstPanel)
 			currentPanel.SetActive (false);
 		self = GetComponent<Button>();
 		self.onClick.AddListener (() =>ChangePanel());
