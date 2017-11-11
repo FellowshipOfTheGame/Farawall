@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour {
     public int[] wallDetect;
     public bool nearWall = false;
     public LayerMask wallLayer;
-    public bool canTranslate = false;
+    public bool canTranslate = false, canTurn;
 
     Interactable currInter = null;
     // Use this for initialization
@@ -40,32 +40,49 @@ public class PlayerControl : MonoBehaviour {
 
     void Move() {
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            Vector3 dir = Quaternion.Euler(pivot.eulerAngles + new Vector3(0.0f, 90.0f, 0.0f)) * Vector3.forward * 0.8f;
-            if (Physics.OverlapSphere(this.transform.position - dir, 0.3f, wallLayer).Length == 0)
-                playerAnime.SetTrigger("TurnBack");
-            else
-                playerAnime.SetTrigger("TurnBack2");
+            if (!isTurning) {
+                Vector3 dir = Quaternion.Euler(pivot.eulerAngles + new Vector3(0.0f, 90.0f, 0.0f)) * Vector3.forward * 0.8f;
+                if (Physics.OverlapSphere(this.transform.position - dir, 0.3f, wallLayer).Length == 0)
+                    playerAnime.SetTrigger("TurnBack");
+                else
+                    playerAnime.SetTrigger("TurnBack2");
 
-            lastTurn = 180.0f;
-            isTurning = true;
+                lastTurn = 180.0f;
+                isTurning = true;
+            }
+            CancelInvoke();
+            Invoke("ResetTurn", 17.0f * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            playerAnime.SetTrigger("TurnRight");
-            lastTurn = 90.0f;
-            isTurning = true;
+            if (!isTurning) {
+                playerAnime.SetTrigger("TurnRight");
+                lastTurn = 90.0f;
+                isTurning = true;
+            }
+            CancelInvoke();
+            Invoke("ResetTurn", 17.0f * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            playerAnime.SetTrigger("TurnLeft");
-            lastTurn = -90.0f;
-            isTurning = true;
+            if (!isTurning) {
+                playerAnime.SetTrigger("TurnLeft");
+                lastTurn = -90.0f;
+                isTurning = true;
+            }
+            CancelInvoke();
+            Invoke("ResetTurn", 17.0f * Time.deltaTime);
         }
 
        Vector3 direction = Quaternion.Euler(pivot.Find("PlayerModel").eulerAngles) * Vector3.forward;
 
         if (Input.GetKey(KeyCode.UpArrow))
             this.GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
+    }
+
+    void ResetTurn() {
+        if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.DownArrow))
+            isTurning = false;
     }
 
     void OnTriggerEnter(Collider other) {

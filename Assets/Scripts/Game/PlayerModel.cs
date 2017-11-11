@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerModel : MonoBehaviour {
 
+    public Animator anime;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +18,19 @@ public class PlayerModel : MonoBehaviour {
 
     public void DirAjust(float angle) {
         this.transform.parent.Rotate(Vector3.up, angle);
-        this.GetComponent<Animator>().SetTrigger("Stop");
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            this.GetComponent<Animator>().SetTrigger("TurnRight");
+        } else if (Input.GetKey(KeyCode.DownArrow)) {
+            this.GetComponent<Animator>().SetTrigger("TurnBack");
+        } else if (Input.GetKey(KeyCode.LeftArrow)) {
+            this.GetComponent<Animator>().SetTrigger("TurnLeft");
+        } else {
+            this.GetComponent<Animator>().SetTrigger("Stop");
+            this.transform.parent.parent.GetComponent<PlayerControl>().isTurning = false;
+        }
+    }
+
+    public void JustStop() {
         this.transform.parent.parent.GetComponent<PlayerControl>().isTurning = false;
     }
 }
