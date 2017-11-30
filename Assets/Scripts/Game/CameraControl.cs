@@ -29,10 +29,10 @@ public class CameraControl : MonoBehaviour {
             if (player.GetComponent<PlayerControl>().isTurning && aux.Length == 0)
                 wallChecker = player.position - Quaternion.Euler(player.Find("Pivot").Find("PlayerModel").eulerAngles) * Vector3.forward * 0.8f;
             Collider[] col = Physics.OverlapSphere(wallChecker, 0.3f, wallLayer);
-            Debug.Log(col.Length);
             Vector3 wallChecker2 = new Vector3();
             if (player.GetComponent<PlayerControl>().isTurning && aux.Length == 0 && col.Length > 0) {
-                float ajust = Vector3.Angle(Vector3.forward,(player.position - col[0].transform.position).normalized);
+                Vector3 diff = player.position - col[0].transform.position;
+                float ajust = Vector3.Angle(Vector3.forward,(new Vector3(diff.x, 0.0f, diff.y)).normalized);
                 wallChecker2 = player.position - Quaternion.Euler(0.0f, ajust, 0.0f) * Quaternion.Euler(-2 * player.Find("Pivot").Find("PlayerModel").eulerAngles) * Vector3.left * 0.8f * Mathf.Sign(player.GetComponent<PlayerControl>().lastTurn);
             } else {
                 while (col.Length > 0 && aux.Length == 0) {

@@ -10,6 +10,7 @@ TagManager:
   - Arrow
   - UltraArrow
   - Wall
+  - Interactable
   layers:
   - Default
   - TransparentFX

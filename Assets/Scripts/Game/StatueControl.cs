@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatueControl : MonoBehaviour {
+public class StatueControl : Interactable {
 
+    GameManager GM;
     public StatueData data;
     public Color onColor, offColor;
-    bool nearPlayer;
     Transform playerPivot;
     public GameObject genericBallon;
     GameObject myBallon = null;
@@ -16,6 +16,7 @@ public class StatueControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GM = FindObjectOfType<GameManager>() as GameManager;
         this.transform.Find("Eye").gameObject.SetActive(false);
         playerPivot = FindObjectOfType<PlayerControl>().transform.Find("Pivot");
     }
@@ -27,15 +28,20 @@ public class StatueControl : MonoBehaviour {
         }
 	}
 
-    public void Interact() {
+    public override void Interact() {
         Camera.main.GetComponent<CameraControl>().currStatue = this.transform;
         Camera.main.GetComponent<CameraControl>().state = "statue";
         myBallon = Instantiate(genericBallon, canvas.transform);
-        myBallon.transform.Find("Text").GetComponent<Text>().text = data.normalMessage;
-        myBallon.transform.Find("Text").GetComponent<Text>().font = data.normalFont;
+        if (GM.player.canTranslate) {
+            myBallon.transform.Find("Text").GetComponent<Text>().text = data.normalMessage;
+            myBallon.transform.Find("Text").GetComponent<Text>().font = data.normalFont;
+        }else {
+            myBallon.transform.Find("Text").GetComponent<Text>().text = data.emojiMessage;
+            myBallon.transform.Find("Text").GetComponent<Text>().font = data.emojiFont;
+        }
     }
 
-    public void Close() {
+    public override void Close() {
         Camera.main.GetComponent<CameraControl>().state = "player";
         Camera.main.GetComponent<CameraControl>().currStatue = null;
         Destroy(myBallon);
