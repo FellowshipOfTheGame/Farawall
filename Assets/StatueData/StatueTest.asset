@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: StatueTest
   m_EditorClassIdentifier: 
   title: Statue1
-  normalMessage: Testando... 1... 2... 3
+  normalMessage: Your quest just started...
   emojiMessage: vc nao entende nada hahaha
   normalFont: {fileID: 12800000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
   emojiFont: {fileID: 12800000, guid: cf0990a7d74fdbb4ba537d3ea26bf0ea, type: 3}
