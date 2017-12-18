@@ -11,6 +11,8 @@ TagManager:
   - UltraArrow
   - Wall
   - Interactable
+  - Door
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -25,11 +27,6 @@ TagManager:
   - Background
   - Arrow
   - Wall
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
