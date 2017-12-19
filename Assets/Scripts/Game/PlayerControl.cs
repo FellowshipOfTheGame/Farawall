@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
+    GameManager gm;
     public float lastTurn = 0.0f;
     public float speed, turnTime;
     public Animator playerAnime;
@@ -18,24 +19,27 @@ public class PlayerControl : MonoBehaviour {
     Interactable currInter = null;
     // Use this for initialization
     void Start () {
+        gm = FindObjectOfType<GameManager>();
         wallDetect = new int[4];
         pivot = this.transform.Find("Pivot");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
-            if (!isTalking) {
-                isTalking = true;
-                currInter.Interact();
-            } else {
-                isTalking = false;
-                currInter.Close();
+        if (!gm.paused) {
+            if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
+                if (!isTalking) {
+                    isTalking = true;
+                    currInter.Interact();
+                } else {
+                    isTalking = false;
+                    currInter.Close();
+                }
             }
+
+            if (!isTalking)
+                Move();
         }
-        
-        if(!isTalking)
-            Move();
     }
 
     void Move() {
@@ -95,5 +99,9 @@ public class PlayerControl : MonoBehaviour {
         if (other.tag == "Interactable") {
             currInter = null;
         }
+    }
+
+    public void TakeDamage() {
+        gm.ShowGameOver();
     }
 }

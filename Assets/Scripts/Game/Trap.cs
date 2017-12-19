@@ -7,6 +7,7 @@ public class Trap : MonoBehaviour {
 	public Transform endPosition;
 	public Transform spears;
 	public float speed;
+    public float delay;
 	private bool active = false;
 	private bool deactivate = false;
 	private float startTime;
@@ -20,12 +21,26 @@ public class Trap : MonoBehaviour {
 	}
 
 	void Update () {
-		if (active) {
+        if (active) {
+            if (spears.position != endPosition.position)
+                spears.position = Vector3.Lerp(spears.position, endPosition.position, delay);
+            else
+                active = false;
+        }
+
+        if (deactivate) {
+            if (spears.position != startPosition.position)
+                spears.position = Vector3.Lerp(spears.position, startPosition.position, delay/5);
+            else
+                deactivate = false;
+        }
+        /*
+        if (active) {
 			float coveredDistance = (Time.time - startTime) * speed;
 			float currentPosition = coveredDistance / distance;
-			spears.position = Vector3.Lerp (start, end, currentPosition);
+			
 			if (spears.position == end) {
-				if (deactivate && end == startPosition.position) {
+				if (deactivate && end == endPosition.position) {
 					deactivate = false;
 					active = false;
 				}
@@ -35,20 +50,22 @@ public class Trap : MonoBehaviour {
 				start = aux;
 				startTime = Time.time;
 			}
-		}
-	}
+		}*/
+    }
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-			start = startPosition.position;
-			end = endPosition.position;
-			active = true;
+            spears.position = startPosition.position;
+            active = true;
+            deactivate = false;
 		}
 	}
 
 	void OnTriggerExit(Collider other){
 		if (other.tag == "Player") {
-			deactivate = true;
+            spears.position = endPosition.position;
+            deactivate = true;
+            active = false;
 		}
 	}
 }
