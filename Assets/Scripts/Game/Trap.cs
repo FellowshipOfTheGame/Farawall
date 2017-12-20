@@ -10,14 +10,9 @@ public class Trap : MonoBehaviour {
     public float delay;
 	private bool active = false;
 	private bool deactivate = false;
-	private float startTime;
-	private float distance;
-	private Vector3 start;
-	private Vector3 end;
 
 	void Start () {
 		spears.position = startPosition.position;
-		distance = Vector3.Distance (startPosition.position, endPosition.position);
 	}
 
 	void Update () {
@@ -34,23 +29,6 @@ public class Trap : MonoBehaviour {
             else
                 deactivate = false;
         }
-        /*
-        if (active) {
-			float coveredDistance = (Time.time - startTime) * speed;
-			float currentPosition = coveredDistance / distance;
-			
-			if (spears.position == end) {
-				if (deactivate && end == endPosition.position) {
-					deactivate = false;
-					active = false;
-				}
-				Vector3 aux;
-				aux = end;
-				end = start;
-				start = aux;
-				startTime = Time.time;
-			}
-		}*/
     }
 
 	void OnTriggerEnter(Collider other){

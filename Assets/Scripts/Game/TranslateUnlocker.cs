@@ -5,6 +5,7 @@ using UnityEngine;
 public class TranslateUnlocker : Interactable {
 
     GameManager GM;
+    public Door door;
 
     // Use this for initialization
     void Start() {
@@ -29,7 +30,11 @@ public class TranslateUnlocker : Interactable {
     public override void Close() {
         Camera.main.GetComponent<CameraControl>().state = "player";
         Camera.main.GetComponent<CameraControl>().currStatue = null;
-        
+        GameObject temp = this.GetComponent<DropItem>().Drop();
+        if (temp != null) {
+            temp.GetComponent<Key>().door = this.door;
+            this.GetComponent<DropItem>().canDrop = false;
+        }
     }
 
     void OnTriggerEnter(Collider other) {

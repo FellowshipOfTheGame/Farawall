@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4038183552343482}
+  - component: {fileID: 65169830528457370}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Untagged
@@ -111,3 +112,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277772425729678}
   m_Mesh: {fileID: 4300000, guid: d0afc091b6395cd4fb6ece1ec96e9fbe, type: 3}
+--- !u!65 &65169830528457370
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881417943489336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
