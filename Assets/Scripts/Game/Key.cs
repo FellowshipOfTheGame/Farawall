@@ -5,21 +5,34 @@ using UnityEngine;
 public class Key : Interactable {
 	public Door door;
 
+    void Update() {
+        this.transform.Find("Sprite").Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
+        if (nearPlayer)
+            this.transform.Find("Sprite").Find("Eye").gameObject.SetActive(true);
+        else
+            this.transform.Find("Sprite").Find("Eye").gameObject.SetActive(false);
+    }
+
 	public override void Interact (){
-		if(nearPlayer) door.Unlock ();
+        Camera.main.GetComponent<CameraControl>().currStatue = this.transform;
+        Camera.main.GetComponent<CameraControl>().state = "statue";
+        door.Unlock();
 	}
 
 	public override void Close(){
-		Destroy (this.gameObject);
+        Camera.main.GetComponent<CameraControl>().state = "player";
+        Camera.main.GetComponent<CameraControl>().currStatue = null;
+        Destroy (this.gameObject);
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Player")
-		nearPlayer = true;
+        if (other.tag == "Player") 
+            nearPlayer = true;
+            
 	}
 
 	void OnTriggerExit(Collider other){
-		if(other.tag == "Player")
-		nearPlayer = false;
+        if (other.tag == "Player")
+            nearPlayer = false;
 	}
 }
