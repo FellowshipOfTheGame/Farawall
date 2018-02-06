@@ -6,11 +6,14 @@ public class TranslateUnlocker : Interactable {
 
     GameManager GM;
     public Door door;
+    Transform pivot;
+    public float camDist, camHeight;
 
     // Use this for initialization
     void Start() {
         GM = FindObjectOfType<GameManager>() as GameManager;
         this.transform.Find("Eye").gameObject.SetActive(false);
+        pivot = transform.Find("Pivot");
     }
 
     // Update is called once per frame
@@ -21,33 +24,33 @@ public class TranslateUnlocker : Interactable {
     }
 
     public override void Interact() {
-        Camera.main.GetComponent<CameraControl>().currStatue = this.transform;
-        Camera.main.GetComponent<CameraControl>().state = "statue";
+        GM.mainCam.focusOnObject(this.transform);
         Debug.Log("Now you can understand the statues...");
         GM.player.canTranslate = true;
     }
 
     public override void Close() {
-        Camera.main.GetComponent<CameraControl>().state = "player";
-        Camera.main.GetComponent<CameraControl>().currStatue = null;
+        GM.mainCam.focusOnObject(GM.player.transform); /*
         GameObject temp = this.GetComponent<DropItem>().Drop();
         if (temp != null) {
             temp.GetComponent<Key>().door = this.door;
             this.GetComponent<DropItem>().canDrop = false;
-        }
+        } */
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
-            this.transform.Find("Eye").gameObject.SetActive(true);
-            nearPlayer = true;
-        }
+    public override void Near() {
+        Vector3 dist = (GM.player.transform.position - transform.position).normalized * camDist;
+        pivot.position = transform.position + new Vector3(dist.x, camHeight, dist.z);
+        float aux = pivot.eulerAngles.x;
+        pivot.transform.LookAt(this.transform);
+        pivot.eulerAngles = new Vector3(aux, pivot.eulerAngles.y, pivot.eulerAngles.z);
+
+        this.transform.Find("Eye").gameObject.SetActive(true);
+        nearPlayer = true;
     }
 
-    void OnTriggerExit(Collider other) {
-        if (other.tag == "Player") {
-            this.transform.Find("Eye").gameObject.SetActive(false);
-            nearPlayer = false;
-        }
+    public override void Away() {
+        this.transform.Find("Eye").gameObject.SetActive(false);
+        nearPlayer = false;
     }
 }

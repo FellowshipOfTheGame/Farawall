@@ -8,29 +8,27 @@ public class StatueControl : Interactable {
     GameManager GM;
     public StatueData data;
     public Color onColor, offColor;
-    Transform playerPivot;
     public GameObject genericBallon;
     GameObject myBallon = null;
     public float ballonOffset, ballonHeight;
     public Canvas canvas;
+    public float camDist, camHeight;
+    Transform pivot;
 
 	// Use this for initialization
 	void Start () {
         GM = FindObjectOfType<GameManager>() as GameManager;
-        this.transform.Find("Eye").gameObject.SetActive(false);
-        playerPivot = FindObjectOfType<PlayerControl>().transform.Find("Pivot");
+        this.transform.Find("Model3D").Find("Eye").gameObject.SetActive(false);
+        pivot = transform.Find("Pivot");
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (nearPlayer) {
-            this.transform.Find("Eye").eulerAngles = playerPivot.Find("PlayerModel").eulerAngles;
-        }
+
 	}
 
     public override void Interact() {
-        Camera.main.GetComponent<CameraControl>().currStatue = this.transform;
-        Camera.main.GetComponent<CameraControl>().state = "statue";
+        GM.mainCam.focusOnObject(this.transform);
         myBallon = Instantiate(genericBallon, canvas.transform);
         if (GM.player.canTranslate) {
             myBallon.transform.Find("Text").GetComponent<Text>().text = data.normalMessage;
@@ -42,25 +40,24 @@ public class StatueControl : Interactable {
     }
 
     public override void Close() {
-        Camera.main.GetComponent<CameraControl>().state = "player";
-        Camera.main.GetComponent<CameraControl>().currStatue = null;
+        GM.mainCam.focusOnObject(GM.player.transform);
         Destroy(myBallon);
         myBallon = null;
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
-            this.transform.Find("Shine").GetComponent<MeshRenderer>().material.color = onColor;
-            this.transform.Find("Eye").gameObject.SetActive(true);
-            nearPlayer = true;
-        }
+    public override void Near() {
+        Vector3 dist = (GM.player.transform.position - transform.position).normalized * camDist;
+        pivot.position = transform.position + new Vector3(dist.x, camHeight, dist.z);
+        float aux = pivot.eulerAngles.x;
+        pivot.transform.LookAt(this.transform);
+        pivot.eulerAngles = new Vector3 (aux, pivot.eulerAngles.y, pivot.eulerAngles.z);
+
+        this.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = onColor;
+        this.transform.Find("Model3D").Find("Eye").gameObject.SetActive(true);
     }
 
-    void OnTriggerExit(Collider other) {
-        if (other.tag == "Player") {
-            this.transform.Find("Shine").GetComponent<MeshRenderer>().material.color = offColor;
-            this.transform.Find("Eye").gameObject.SetActive(false);
-            nearPlayer = false;
-        }
+    public override void Away() {
+        this.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = offColor;
+        this.transform.Find("Model3D").Find("Eye").gameObject.SetActive(false);
     }
 }

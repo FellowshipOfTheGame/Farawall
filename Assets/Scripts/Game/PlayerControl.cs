@@ -1,27 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerControl : MonoBehaviour {
 
     GameManager gm;
-    public float lastTurn = 0.0f;
-    public float speed, turnTime;
-    public Animator playerAnime;
-    public bool isTurning = false;
-    Transform pivot;
+    ThirdPersonUserControl movement;
     bool isTalking = false;
-    public int[] wallDetect;
     public bool nearWall = false;
-    public LayerMask wallLayer;
-    public bool canTranslate = false, canTurn;
+    public bool canTranslate = false;
+    List<int> codes;
 
     Interactable currInter = null;
     // Use this for initialization
     void Start () {
         gm = FindObjectOfType<GameManager>();
-        wallDetect = new int[4];
-        pivot = this.transform.Find("Pivot");
+        movement = this.GetComponent<ThirdPersonUserControl>();
+        codes = new List<int>();
 	}
 	
 	// Update is called once per frame
@@ -29,76 +25,44 @@ public class PlayerControl : MonoBehaviour {
         if (!gm.paused) {
             if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
                 if (!isTalking) {
-                    isTalking = true;
+                    if (!currInter.isItem) {
+                        isTalking = true;
+                        movement.setCanMove(false);
+                    }
                     currInter.Interact();
                 } else {
                     isTalking = false;
+                    movement.setCanMove(true);
                     currInter.Close();
                 }
             }
-
-            if (!isTalking)
-                Move();
         }
-    }
-
-    void Move() {
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            if (!isTurning) {
-                Vector3 dir = Quaternion.Euler(pivot.eulerAngles + new Vector3(0.0f, 90.0f, 0.0f)) * Vector3.forward * 0.8f;
-                if (Physics.OverlapSphere(this.transform.position - dir, 0.3f, wallLayer).Length == 0)
-                    playerAnime.SetTrigger("TurnBack");
-                else
-                    playerAnime.SetTrigger("TurnBack2");
-
-                lastTurn = 180.0f;
-                isTurning = true;
-            }
-            CancelInvoke();
-            Invoke("ResetTurn", 17.0f * Time.deltaTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            if (!isTurning) {
-                playerAnime.SetTrigger("TurnRight");
-                lastTurn = 90.0f;
-                isTurning = true;
-            }
-            CancelInvoke();
-            Invoke("ResetTurn", 17.0f * Time.deltaTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            if (!isTurning) {
-                playerAnime.SetTrigger("TurnLeft");
-                lastTurn = -90.0f;
-                isTurning = true;
-            }
-            CancelInvoke();
-            Invoke("ResetTurn", 17.0f * Time.deltaTime);
-        }
-
-       Vector3 direction = Quaternion.Euler(pivot.Find("PlayerModel").eulerAngles) * Vector3.forward;
-
-        if (Input.GetKey(KeyCode.UpArrow))
-            this.GetComponent<Rigidbody>().velocity = direction * speed * Time.deltaTime;
-    }
-
-    void ResetTurn() {
-        if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.DownArrow))
-            isTurning = false;
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Interactable") {
             currInter = other.GetComponent<Interactable>();
+            currInter.Near();
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.tag == "Interactable") {
+            currInter.Away();
             currInter = null;
         }
+    }
+
+    public void addKey(int code) {
+        codes.Add(code);
+    }
+
+    public bool haveKey(int code) {
+        for (int i = 0; i < codes.Count; i++) {
+            if (codes[i] == code)
+                return true;
+        }
+        return false;
     }
 
     public void TakeDamage() {

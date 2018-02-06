@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 21778b889ffe9864fb3232410b1c34b2
+timeCreated: 1517940222
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Megrim
+  fontNames:
+  - Megrim
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

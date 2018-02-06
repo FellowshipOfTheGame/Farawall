@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Key : Interactable {
+    GameManager gm;
 	public Door door;
+
+    void Start() {
+        gm = FindObjectOfType<GameManager>();
+    }
 
     void Update() {
         this.transform.Find("Sprite").Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
@@ -14,25 +19,20 @@ public class Key : Interactable {
     }
 
 	public override void Interact (){
-        Camera.main.GetComponent<CameraControl>().currStatue = this.transform;
-        Camera.main.GetComponent<CameraControl>().state = "statue";
-        door.Unlock();
+        gm.player.addKey(door.code);
+        Debug.Log("Got key " + door.code);
+        Close();
 	}
 
 	public override void Close(){
-        Camera.main.GetComponent<CameraControl>().state = "player";
-        Camera.main.GetComponent<CameraControl>().currStatue = null;
-        Destroy (this.gameObject);
+        Destroy(this.gameObject);
+    }
+
+    public override void Near() {
+        nearPlayer = true;      
 	}
 
-	void OnTriggerEnter(Collider other){
-        if (other.tag == "Player") 
-            nearPlayer = true;
-            
-	}
-
-	void OnTriggerExit(Collider other){
-        if (other.tag == "Player")
-            nearPlayer = false;
+	public override void Away(){
+        nearPlayer = false;
 	}
 }
