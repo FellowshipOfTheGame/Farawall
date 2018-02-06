@@ -8,7 +8,7 @@ public class HealItem : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "Player") {
-			col.GetComponent<Neith> ().Heal (hp);
+			//col.GetComponent<Neith> ().Heal (hp);
 			Destroy (gameObject);
 		}
 	}
