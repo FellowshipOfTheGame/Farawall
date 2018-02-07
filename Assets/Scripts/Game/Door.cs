@@ -82,7 +82,8 @@ public class Door: Interactable {
                 openDoor = true;
             else if (hasKey && gm.player.haveKey(code))
                 Unlock();
-			inMovement = true;
+
+            inMovement = closeDoor || openDoor;
 		}
 	}
 

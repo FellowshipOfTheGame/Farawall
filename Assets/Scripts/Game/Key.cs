@@ -5,17 +5,20 @@ using UnityEngine;
 public class Key : Interactable {
     GameManager gm;
 	public Door door;
+    Transform keyModel;
+    public TextMesh codePlace;
 
     void Start() {
         gm = FindObjectOfType<GameManager>();
+        keyModel = transform.Find("3dModel");
+        codePlace.text = "K-" + door.code.ToString();
+        codePlace.gameObject.SetActive(false);
     }
 
     void Update() {
-        this.transform.Find("Sprite").Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
+        keyModel.Rotate(Vector3.up, 30.0f * Time.deltaTime);
         if (nearPlayer)
-            this.transform.Find("Sprite").Find("Eye").gameObject.SetActive(true);
-        else
-            this.transform.Find("Sprite").Find("Eye").gameObject.SetActive(false);
+            codePlace.transform.forward = gm.player.transform.forward;
     }
 
 	public override void Interact (){
@@ -29,10 +32,12 @@ public class Key : Interactable {
     }
 
     public override void Near() {
+        codePlace.gameObject.SetActive(true);
         nearPlayer = true;      
 	}
 
 	public override void Away(){
+        codePlace.gameObject.SetActive(false);
         nearPlayer = false;
 	}
 }
