@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour {
 
@@ -10,5 +11,4 @@ public class Interactable : MonoBehaviour {
     public virtual void Close() { }
     public virtual void Near() { }
     public virtual void Away() { }
-
 }

@@ -30,12 +30,12 @@ public class TranslateUnlocker : Interactable {
     }
 
     public override void Close() {
-        GM.mainCam.focusOnObject(GM.player.transform); /*
+        GM.mainCam.focusOnObject(GM.player.transform);
         GameObject temp = this.GetComponent<DropItem>().Drop();
         if (temp != null) {
             temp.GetComponent<Key>().door = this.door;
             this.GetComponent<DropItem>().canDrop = false;
-        } */
+        }
     }
 
     public override void Near() {

@@ -11,7 +11,6 @@ public class StatueControl : Interactable {
     public GameObject genericBallon;
     GameObject myBallon = null;
     public float ballonOffset, ballonHeight;
-    public Canvas canvas;
     public float camDist, camHeight;
     Transform pivot;
 
@@ -29,7 +28,7 @@ public class StatueControl : Interactable {
 
     public override void Interact() {
         GM.mainCam.focusOnObject(this.transform);
-        myBallon = Instantiate(genericBallon, canvas.transform);
+        myBallon = Instantiate(genericBallon, GM.canvas.transform);
         if (GM.player.canTranslate) {
             myBallon.transform.Find("Text").GetComponent<Text>().text = data.normalMessage;
             myBallon.transform.Find("Text").GetComponent<Text>().font = data.normalFont;

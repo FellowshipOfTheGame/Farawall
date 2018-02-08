@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public CameraControl mainCam;
+    public Canvas canvas;
     public PlayerControl player;
     public GameObject menu;
     public GameObject gameOver;

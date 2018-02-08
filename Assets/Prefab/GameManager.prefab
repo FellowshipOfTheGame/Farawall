@@ -52,7 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 0}
+  canvas: {fileID: 0}
   player: {fileID: 0}
   menu: {fileID: 0}
   gameOver: {fileID: 0}
+  learnKey: 1
+  learnDoor: 0
+  learnStatue: 0
   paused: 0

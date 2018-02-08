@@ -40,7 +40,7 @@ public class Door: Interactable {
         if (hasKey)
             setIcon(lockIcon);
         else
-            setIcon(lockIcon);
+            setIcon(normalIcon);
 
         setColor(offColor);
     }
@@ -92,10 +92,11 @@ public class Door: Interactable {
     }
 
     public override void Near() {
-        if (Vector3.Distance(gm.player.transform.position, transform.position) < Vector3.Distance(gm.player.transform.position, pivot.position))
+        if (Vector3.Distance(gm.player.transform.position, transform.position) < Vector3.Distance(gm.player.transform.position, pivot.position)) {
             pivot.localPosition = -pivot.localPosition;
+            pivot.Rotate(Vector3.up, 180.0f);
+        }
 
-        pivot.transform.LookAt(this.transform);
         if (unlocked)
             setColor(onColor);
         else if (gm.player.haveKey(code)) {
