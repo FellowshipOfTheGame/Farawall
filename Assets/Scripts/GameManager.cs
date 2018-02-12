@@ -10,9 +10,15 @@ public class GameManager : MonoBehaviour {
     public GameObject menu;
     public GameObject gameOver;
     public bool paused = false;
-
+    public PuzzleInfo[] puzzles;
     // Use this for initialization
     void Start () {
+        Transform aux = transform.Find("Puzzles");
+        puzzles = new PuzzleInfo[aux.childCount];
+        for (int i = 0; i < aux.childCount; i++) {
+            puzzles[i] = aux.GetChild(i).GetComponent<PuzzleInfo>();
+            aux.GetChild(i).gameObject.SetActive(false);
+        }
         paused = false;
 	}
 	

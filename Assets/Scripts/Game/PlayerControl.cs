@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour {
 
     GameManager gm;
     ThirdPersonUserControl movement;
-    bool isTalking = false;
+    public bool isTalking = false;
     public bool nearWall = false;
     public bool canTranslate = false;
     List<int> codes;
@@ -41,6 +41,8 @@ public class PlayerControl : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Interactable") {
+            if (currInter != null)
+                currInter.Away();
             currInter = other.GetComponent<Interactable>();
             currInter.Near();
         }
@@ -48,8 +50,10 @@ public class PlayerControl : MonoBehaviour {
 
     void OnTriggerExit(Collider other) {
         if (other.tag == "Interactable") {
-            currInter.Away();
-            currInter = null;
+            Interactable aux = other.GetComponent<Interactable>();
+            aux.Away();
+            if (currInter == aux)
+                currInter = null;
         }
     }
 

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
-  m_Name: StatueTest
+  m_Name: P1E3
   m_EditorClassIdentifier: 
-  name: Statue
-  normalMessage: Your quest just started...
-  emojiMessage: vc nao entende nada hahaha
+  name: Osires
+  normalMessage: "Moises fez isso, Hathor! Isis nunca faria isso te garanto. Eu e
+    ela nos conhecemos desde crian\xE7as."
+  emojiMessage: eu to ocupado

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
-  m_Name: StatueTest
+  m_Name: P1E2
   m_EditorClassIdentifier: 
-  name: Statue
-  normalMessage: Your quest just started...
-  emojiMessage: vc nao entende nada hahaha
+  name: Isis
+  normalMessage: "Eu sou inocente nisso tudo! Amon fez isso! Sempre fui sincera com
+    voc\xEA porque n\xE3o acredita em mim?"
+  emojiMessage: fui eu nao

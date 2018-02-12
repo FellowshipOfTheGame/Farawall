@@ -9,8 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
-  m_Name: StatueTest
+  m_Name: P1E5
   m_EditorClassIdentifier: 
-  name: Statue
-  normalMessage: Your quest just started...
-  emojiMessage: vc nao entende nada hahaha
+  name: "Rams\xE9s"
+  normalMessage: "Meu amigo Hathor est\xE1 bravo por algo que eu n\xE3o fiz! Eu quase
+    n\xE3o tenho tempo para mexer na minha conta imagina o dos outros. Foi Moises
+    que aprontou."
+  emojiMessage: "a culpa nao \xE9 minha"
