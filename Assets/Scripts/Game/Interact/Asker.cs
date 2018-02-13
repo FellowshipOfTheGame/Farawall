@@ -29,7 +29,7 @@ public class Asker : MonoBehaviour {
 
     public void activePuzzle() {
         if (isNew) {
-            gm.puzzles[puzzleId].gameObject.SetActive(true);
+            gm.ActivePuzzle(puzzleId);
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
             k.door = gm.puzzles[puzzleId].startDoor;
             isNew = false;

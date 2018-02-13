@@ -19,24 +19,22 @@ public class PlayerControl : MonoBehaviour {
         movement = this.GetComponent<ThirdPersonUserControl>();
         codes = new List<int>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (!gm.paused) {
-            if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
-                if (!isTalking) {
-                    if (!currInter.isItem) {
-                        isTalking = true;
-                        movement.setCanMove(false);
-                    }
-                    currInter.Interact();
-                } else {
-                    isTalking = false;
-                    movement.setCanMove(true);
-                    currInter.Close();
+
+    // Update is called once per frame
+    void Update() {
+        if (currInter != null && Input.GetKeyDown(KeyCode.X)) {
+            if (!isTalking) {
+                if (!currInter.isItem) {
+                    isTalking = true;
+                    movement.setCanMove(false);
                 }
+                currInter.Interact();
+            } else {
+                isTalking = false;
+                movement.setCanMove(true);
+                currInter.Close();
             }
-        }
+        }    
     }
 
     void OnTriggerEnter(Collider other) {
