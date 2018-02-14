@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Door: Interactable {
     GameManager gm;
     Transform pivot;
     public float camDistance;
-
 	public Transform startPosition;
 	public Transform endPosition;
 	public Transform door;
@@ -123,6 +123,11 @@ public class Door: Interactable {
 
 	public void Unlock(){
 		unlocked = true;
+        Destroy(gm.keyFloor.Find("Keys2").Find(code.ToString()).gameObject);
+        GameObject temp = Instantiate(gm.keyFloor.Find("Keys1").GetChild(0).gameObject, gm.keyFloor.Find("Keys1"));
+        temp.name = code.ToString();
+        temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + code.ToString();
+        temp.SetActive(true);
         openDoor = true;
     }
 

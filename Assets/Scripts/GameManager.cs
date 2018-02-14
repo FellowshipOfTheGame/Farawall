@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public CameraControl mainCam;
+    public Transform keyFloor;
     public Canvas canvas;
     public PlayerControl player;
     public InGameMenu menu;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public List<PuzzleInfo> activedPuzzles;
     // Use this for initialization
     void Start () {
+        menu.gameObject.SetActive(false);
         activedPuzzles = new List<PuzzleInfo>();
         Transform aux = transform.Find("Puzzles");
         puzzles = new PuzzleInfo[aux.childCount];
