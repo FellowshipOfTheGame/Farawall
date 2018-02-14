@@ -142,4 +142,5 @@ public class Door: Interactable {
         iconPlaces[0].sprite = s;
         iconPlaces[1].sprite = s;
     }
+
 }
