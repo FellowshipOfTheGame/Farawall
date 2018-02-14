@@ -7,9 +7,11 @@ public class PlayerControl : MonoBehaviour {
 
     GameManager gm;
     ThirdPersonUserControl movement;
-    public bool isTalking = false;
-    public bool nearWall = false;
+    bool isTalking = false;
+
+    public bool canPlay = false;
     public bool canTranslate = false;
+    public 
     List<int> codes;
 
     Interactable currInter = null;

@@ -24,6 +24,7 @@ public class StatueControl : Interactable {
     Informer inf;
     Asker ask;
     Solutioner sol;
+    Unlocker ul;
 
 	// Use this for initialization
 	void Start () {
@@ -33,10 +34,10 @@ public class StatueControl : Interactable {
         inf = this.GetComponent<Informer>();
         ask = this.GetComponent<Asker>();
         sol = this.GetComponent<Solutioner>();
-        if (sol == null)
-            message.transform.Find("Text").GetComponent<TextMesh>().text = "Talk";
-        else
+        ul = this.GetComponent<Unlocker>();
+        if (sol != null)
             message.transform.Find("Text").GetComponent<TextMesh>().text = sol.answer;
+
         this.name = data.name;
         message.SetActive(false);
     }
@@ -57,13 +58,17 @@ public class StatueControl : Interactable {
 
                 if (inf != null)
                     inf.sendMessage();
-                else if (ask != null)
+                if (ask != null)
                     ask.talk();
-                else if (sol != null)
+                if (sol != null)
                     sol.chooseThis();
+                if (ul != null)
+                    ul.GiveUpgrade();
             } else {
                 myBallon.transform.Find("Text").GetComponent<Text>().text = data.emojiMessage;
                 myBallon.transform.Find("Text").GetComponent<Text>().font = emojiFont;
+                if (ul != null && this.GetComponent<TranslateUnlocker>() != null)
+                    ul.GiveUpgrade();
             }
         }
     }

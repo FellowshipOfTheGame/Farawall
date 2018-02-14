@@ -310,16 +310,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc0f19277e2be9478d25ed9e78d7f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isItem: 0
   data: {fileID: 11400000, guid: 047ef28ca67afd4438ad0d313cc60b30, type: 2}
   onColor: {r: 1, g: 0.70980394, b: 0.1254902, a: 1}
   offColor: {r: 0.3019608, g: 0.24705882, b: 0.24705882, a: 1}
   genericBallon: {fileID: 1765162015217688, guid: 4f3dc9d6ee509a241a740f589ad11c4a,
     type: 2}
+  normalFont: {fileID: 12800000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
+  emojiFont: {fileID: 12800000, guid: bb932467155763f49877aebe9dc93642, type: 3}
+  locked: 0
   ballonOffset: 1
   ballonHeight: 2
-  canvas: {fileID: 0}
   camDist: 2
   camHeight: 1
+  message: {fileID: 0}
+  myBallon: {fileID: 0}
 --- !u!135 &135311716318604246
 SphereCollider:
   m_ObjectHideFlags: 1
