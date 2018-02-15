@@ -25,7 +25,7 @@ public class StatueControl : Interactable {
     Asker ask;
     Solutioner sol;
     Unlocker ul;
-
+    Inquisitor inq;
 	// Use this for initialization
 	void Start () {
         GM = FindObjectOfType<GameManager>() as GameManager;
@@ -35,6 +35,7 @@ public class StatueControl : Interactable {
         ask = this.GetComponent<Asker>();
         sol = this.GetComponent<Solutioner>();
         ul = this.GetComponent<Unlocker>();
+        inq = this.GetComponent<Inquisitor>();
         if (sol != null)
             message.transform.Find("Text").GetComponent<TextMesh>().text = sol.answer;
 
@@ -59,11 +60,13 @@ public class StatueControl : Interactable {
                 if (inf != null)
                     inf.sendMessage();
                 if (ask != null)
-                    ask.talk();
+                    ask.activePuzzle();
                 if (sol != null)
                     sol.chooseThis();
                 if (ul != null)
                     ul.GiveUpgrade();
+                if (inq != null)
+                    inq.getAnswer();
             } else {
                 myBallon.transform.Find("Text").GetComponent<Text>().text = data.emojiMessage;
                 myBallon.transform.Find("Text").GetComponent<Text>().font = emojiFont;

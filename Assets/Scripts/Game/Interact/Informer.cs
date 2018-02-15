@@ -22,15 +22,15 @@ public class Informer : MonoBehaviour {
 
     public void sendMessage() {
         if (isNew) {
-            gm.puzzles[puzzleId].AddInfo(info);
+            gm.activedPuzzles[puzzleId].AddInfo(info);
             isNew = false;
         }
     }
 
     public void checkPuzzle() {
-        if (gm.puzzles[puzzleId].isFull()) {
+        if (gm.activedPuzzles[puzzleId].isFull()) {
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
-            k.door = gm.puzzles[puzzleId].endDoor;
+            k.door = gm.activedPuzzles[puzzleId].endDoor;
         }
     }
 }

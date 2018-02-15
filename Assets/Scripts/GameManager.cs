@@ -4,32 +4,40 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public bool inGame;
+    [Space (5)]
     public CameraControl mainCam;
     public Transform keyFloor;
     public Canvas canvas;
     public PlayerControl player;
     public InGameMenu menu;
-    public GameObject gameOver;
+    GameObject gameOver;
     public bool paused = false;
-    public PuzzleInfo[] puzzles;
     public List<PuzzleInfo> activedPuzzles;
     // Use this for initialization
     void Start () {
-        menu.gameObject.SetActive(false);
-        activedPuzzles = new List<PuzzleInfo>();
-        Transform aux = transform.Find("Puzzles");
-        puzzles = new PuzzleInfo[aux.childCount];
-        for (int i = 0; i < aux.childCount; i++) {
-            puzzles[i] = aux.GetChild(i).GetComponent<PuzzleInfo>();
-        }
-        paused = false;
+        if (inGame)
+            startGame();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Return))
+		if (inGame && Input.GetKeyDown(KeyCode.Return))
             pausePlay();
 	}
+
+    void startGame() {
+        mainCam = FindObjectOfType<CameraControl>() as CameraControl;
+        canvas = FindObjectOfType<Canvas>() as Canvas;
+        menu = FindObjectOfType<InGameMenu>() as InGameMenu;
+        keyFloor = menu.transform.Find("DataTab").Find("KeyData").GetChild(0);
+        player = FindObjectOfType<PlayerControl>() as PlayerControl;
+        menu.gameObject.SetActive(false);
+
+        activedPuzzles = new List<PuzzleInfo>();
+        Transform aux = transform.Find("Puzzles");
+        paused = false;
+    }
 
     public void pausePlay() {
         if (paused) {
@@ -44,11 +52,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void ActivePuzzle(int id) {
-        if (id < puzzles.Length && activedPuzzles.Count == 0)
+    public void ActivePuzzle(PuzzleInfo p) {
+        if (activedPuzzles.Count == 0)
             menu.transform.Find("DataTab").Find("Buttons").Find("PuzzleButton").gameObject.SetActive(true);
-        activedPuzzles.Add(puzzles[id]);
-        Debug.Log("active " + id);
+
+        p.id = activedPuzzles.Count;
+        activedPuzzles.Add(p);
+        for (int i = 0; i < p.statues.Length; i++)
+            p.statues[i].GetComponent<Informer>().puzzleId = p.id;
+        for (int i = 0; i < p.solutions.Length; i++)
+            p.solutions[i].GetComponent<Solutioner>().puzzleId = p.id;
     }
 
     public void ShowGameOver() {

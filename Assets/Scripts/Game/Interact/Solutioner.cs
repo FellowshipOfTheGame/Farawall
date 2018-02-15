@@ -25,6 +25,6 @@ public class Solutioner : MonoBehaviour {
     }
 
     public void check() {
-        Debug.Log(gm.puzzles[puzzleId].checkAnswer(answer));
+        Debug.Log(gm.activedPuzzles[puzzleId].checkAnswer(answer));
     }
 }

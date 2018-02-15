@@ -8,7 +8,8 @@ public class PuzzleInfo : MonoBehaviour {
     public GameObject tab;
     Transform infoTab;
     public string intro, answer;
-    public StatueControl[] statues;
+    public StatueControl[] statues, solutions;
+    public Inquisitor finalStatue;
     public Door startDoor, endDoor;
     public List<string> infos;
     GameObject genInfo;

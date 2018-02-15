@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 114596923056172370}
   - component: {fileID: 114618079750302172}
   - component: {fileID: 114307224082381596}
+  - component: {fileID: 114793509476624576}
   m_Layer: 0
   m_Name: AskStatue
   m_TagString: Interactable
@@ -497,12 +498,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545abd5f35e7506408bf92180341cad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleId: 0
   endPuzzle: 0
   correctMsg: 
   wrongMsg: 
   emptyMsg: 
-  solutions: []
+--- !u!114 &114793509476624576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952490245945620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d85fc50600ce242bf02c567f7c1001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  tab: {fileID: 0}
+  intro: 
+  answer: Amon
+  statues:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  solutions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  startDoor: {fileID: 0}
+  endDoor: {fileID: 0}
+  infos: []
 --- !u!135 &135083465532233334
 SphereCollider:
   m_ObjectHideFlags: 1
