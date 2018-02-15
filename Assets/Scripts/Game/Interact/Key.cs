@@ -15,7 +15,7 @@ public class Key : Interactable {
         keyModel = transform.Find("3dModel");
         codePlace.text = "K-" + door.code.ToString();
         codePlace.gameObject.SetActive(false);
-        keyList = gm.keyFloor.Find("Keys2");
+        keyList = gm.menu.keyFloor.Find("Keys2");
         genInfo = keyList.GetChild(0).gameObject;
     }
 

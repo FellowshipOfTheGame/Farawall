@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager gm;
     public bool inGame;
     [Space (5)]
     public CameraControl mainCam;
-    public Transform keyFloor;
     public Canvas canvas;
     public PlayerControl player;
     public InGameMenu menu;
@@ -18,7 +19,9 @@ public class GameManager : MonoBehaviour {
     void Start () {
         if (inGame)
             startGame();
-	}
+        else
+            gm = this.GetComponent<GameManager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,13 +33,10 @@ public class GameManager : MonoBehaviour {
         mainCam = FindObjectOfType<CameraControl>() as CameraControl;
         canvas = FindObjectOfType<Canvas>() as Canvas;
         menu = FindObjectOfType<InGameMenu>() as InGameMenu;
-        keyFloor = menu.transform.Find("DataTab").Find("KeyData").GetChild(0);
-        player = FindObjectOfType<PlayerControl>() as PlayerControl;
         menu.gameObject.SetActive(false);
-
         activedPuzzles = new List<PuzzleInfo>();
-        Transform aux = transform.Find("Puzzles");
         paused = false;
+        inGame = true;
     }
 
     public void pausePlay() {

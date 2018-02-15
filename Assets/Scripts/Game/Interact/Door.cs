@@ -123,8 +123,8 @@ public class Door: Interactable {
 
 	public void Unlock(){
 		unlocked = true;
-        Destroy(gm.keyFloor.Find("Keys2").Find(code.ToString()).gameObject);
-        GameObject temp = Instantiate(gm.keyFloor.Find("Keys1").GetChild(0).gameObject, gm.keyFloor.Find("Keys1"));
+        Destroy(gm.menu.keyFloor.Find("Keys2").Find(code.ToString()).gameObject);
+        GameObject temp = Instantiate(gm.menu.keyFloor.Find("Keys1").GetChild(0).gameObject, gm.menu.keyFloor.Find("Keys1"));
         temp.name = code.ToString();
         temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + code.ToString();
         temp.SetActive(true);
