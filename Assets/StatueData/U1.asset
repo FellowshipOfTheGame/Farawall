@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: U1
   m_EditorClassIdentifier: 
   name: Horus
-  normalMessage: Pega o tradutor ae
-  emojiMessage: Pega o tradutor ae
+  normalMessage: "Agora voc\xEA tem o Tradutor! Tente falar com outras est\xE1tuas"
+  emojiMessage: "Agora voc\xEA tem o Tradutor! Tente falar com outras est\xE1tuas"

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
-  m_Name: U3
+  m_Name: F1
   m_EditorClassIdentifier: 
-  name: Horus
-  normalMessage: "Agora voc\xEA tem uma aba da Dados no menu! E uma chave pra entrada
-    de um labirinto, boa sorte!"
-  emojiMessage: bom dia
+  name: Hathor
+  normalMessage: Muito bem! Me mostre o culpado!
+  emojiMessage: Muito bem! Me mostre o culpado!

@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3bf544893dad748883a13efe8bfc57, type: 3}
   m_Name: U2
   m_EditorClassIdentifier: 
-  name: U2
-  normalMessage: Hey vc gosta de minigames?
-  emojiMessage: i dont speak english
+  name: Horus
+  normalMessage: "Os minigames n\xE3o est\xE3o dispon\xEDveis. Pegue a chave atr\xE1s
+    de voc\xEA. Ah e n\xE3o se preocupe mais com espinhos saindo do ch\xE3o daqui
+    pra frente"
+  emojiMessage: awxfcK!
