@@ -17,7 +17,8 @@ public class PlayerControl : MonoBehaviour {
     Interactable currInter = null;
     // Use this for initialization
     void Start () {
-        gm = GameManager.gm;
+        gm = GameManager.instance;
+        gm.player = this.GetComponent<PlayerControl>();
         movement = this.GetComponent<ThirdPersonUserControl>();
         codes = new List<int>();
 	}

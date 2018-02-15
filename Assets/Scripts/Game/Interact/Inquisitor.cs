@@ -13,7 +13,7 @@ public class Inquisitor : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        gm = FindObjectOfType<GameManager>() as GameManager;
+        gm = GameManager.instance;
         myStatue = this.GetComponent<StatueControl>();
     }
 

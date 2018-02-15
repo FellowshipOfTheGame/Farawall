@@ -8,15 +8,11 @@ public class Key : Interactable {
 	public Door door;
     Transform keyModel;
     public TextMesh codePlace;
-    Transform keyList;
-    GameObject genInfo;
     void Start() {
-        gm = FindObjectOfType<GameManager>();
+        gm = GameManager.instance;
         keyModel = transform.Find("3dModel");
         codePlace.text = "K-" + door.code.ToString();
         codePlace.gameObject.SetActive(false);
-        keyList = gm.menu.keyFloor.Find("Keys2");
-        genInfo = keyList.GetChild(0).gameObject;
     }
 
     void Update() {
@@ -28,7 +24,7 @@ public class Key : Interactable {
 	public override void Interact (){
         gm.player.addKey(door.code);
         Debug.Log("Got key " + door.code);
-        GameObject temp = Instantiate(genInfo, keyList);
+        GameObject temp = Instantiate(gm.menu.keyFloor.Find("Keys2").GetChild(0).gameObject, gm.menu.keyFloor.Find("Keys2"));
         temp.name = door.code.ToString();
         temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + door.code.ToString();
         temp.SetActive(true);

@@ -12,7 +12,7 @@ public class Unlocker : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        GM = FindObjectOfType<GameManager>() as GameManager;
+        GM = GameManager.instance;
         myStatue = this.GetComponent<StatueControl>();
     }
 

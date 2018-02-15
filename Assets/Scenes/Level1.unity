@@ -8045,6 +8045,11 @@ Prefab:
       propertyPath: m_Target
       value: 
       objectReference: {fileID: 1964643580}
+    - target: {fileID: 114159925086879944, guid: 996bd118afcee534b8edb7926e5dfb35,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1944266539}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 996bd118afcee534b8edb7926e5dfb35, type: 2}
   m_IsPrefabParent: 0

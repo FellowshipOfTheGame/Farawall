@@ -30,7 +30,7 @@ public class Door: Interactable {
 	private bool unlocked;
 
 	void Start () {
-        gm = FindObjectOfType<GameManager>() as GameManager;
+        gm = GameManager.instance;
         pivot = transform.Find("Pivot");
 		distance = Vector3.Distance (startPosition.position, endPosition.position);
 		unlocked = !hasKey;

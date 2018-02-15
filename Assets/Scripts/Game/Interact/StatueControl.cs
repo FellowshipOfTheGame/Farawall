@@ -28,7 +28,7 @@ public class StatueControl : Interactable {
     Inquisitor inq;
 	// Use this for initialization
 	void Start () {
-        GM = FindObjectOfType<GameManager>() as GameManager;
+        GM = GameManager.instance;
         this.transform.Find("Model3D").Find("Eye").gameObject.SetActive(false);
         pivot = transform.Find("Pivot");
         inf = this.GetComponent<Informer>();
@@ -52,7 +52,7 @@ public class StatueControl : Interactable {
         if (!locked) {
             message.SetActive(false);
             GM.mainCam.focusOnObject(this.transform);
-            myBallon = Instantiate(genericBallon, GM.canvas.transform);
+            myBallon = Instantiate(genericBallon, GM.mainCam.canvas.transform);
             if (GM.player.canTranslate) {
                 myBallon.transform.Find("Text").GetComponent<Text>().text = data.normalMessage;
                 myBallon.transform.Find("Text").GetComponent<Text>().font = normalFont;

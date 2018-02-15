@@ -12,9 +12,11 @@ public class InGameMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gm = FindObjectOfType<GameManager>() as GameManager;
+        gm = GameManager.instance;
+        gm.menu = this.GetComponent<InGameMenu>();
         Reset();
-	}
+        gameObject.SetActive(false);
+    }
     public void Reset() {
         if (activeTab != null)
             activeTab.SetActive(false);

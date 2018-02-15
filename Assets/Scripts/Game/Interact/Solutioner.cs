@@ -11,7 +11,7 @@ public class Solutioner : MonoBehaviour {
     public Color chosenColor;
 	// Use this for initialization
 	void Start () {
-        gm = FindObjectOfType<GameManager>() as GameManager;
+        gm = GameManager.instance;
 	}
 
     public void chooseThis() {

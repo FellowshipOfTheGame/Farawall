@@ -5,35 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager gm;
+    public static GameManager instance;
     public bool inGame;
-    [Space (5)]
-    public CameraControl mainCam;
-    public Canvas canvas;
-    public PlayerControl player;
-    public InGameMenu menu;
-    GameObject gameOver;
-    public bool paused = false;
-    public List<PuzzleInfo> activedPuzzles;
+    [HideInInspector] public CameraControl mainCam;
+    [HideInInspector] public PlayerControl player;
+    [HideInInspector] public InGameMenu menu;
+    [HideInInspector] public bool paused = false;
+    [HideInInspector] public List<PuzzleInfo> activedPuzzles;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Use this for initialization
     void Start () {
         if (inGame)
             startGame();
-        else
-            gm = this.GetComponent<GameManager>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (inGame && Input.GetKeyDown(KeyCode.Return))
+		if (inGame && Input.GetKeyDown(KeyCode.Escape))
             pausePlay();
 	}
 
+    public void loadGameScene(string scene) {
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        startGame();
+    }
+
     void startGame() {
-        mainCam = FindObjectOfType<CameraControl>() as CameraControl;
-        canvas = FindObjectOfType<Canvas>() as Canvas;
-        menu = FindObjectOfType<InGameMenu>() as InGameMenu;
-        menu.gameObject.SetActive(false);
         activedPuzzles = new List<PuzzleInfo>();
         paused = false;
         inGame = true;
@@ -65,7 +71,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ShowGameOver() {
-        paused = true;
-        gameOver.SetActive(true);
+        //gameOver.SetActive(true);
     }
 }

@@ -6,6 +6,7 @@ using UnityStandardAssets.Cameras;
 public class CameraControl : MonoBehaviour {
 
     AutoCam cam;
+    public Canvas canvas;
     public string state;
     public Transform currStatue, focus;
     public float transitionDelay;
@@ -14,6 +15,7 @@ public class CameraControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = this.GetComponent<AutoCam>();
+        GameManager.instance.mainCam = this.GetComponent<CameraControl>();
         pivot = transform.Find("Pivot");
         focus = cam.Target.Find("Pivot");
     }

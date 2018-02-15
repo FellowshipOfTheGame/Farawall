@@ -10,7 +10,7 @@ public class Informer : MonoBehaviour {
     public bool isNew = true;
 	// Use this for initialization
 	void Start () {
-        gm = FindObjectOfType<GameManager>() as GameManager;
+        gm = GameManager.instance;
         StatueData data = this.GetComponent<StatueControl>().data;
         info = data.name + ": " + data.normalMessage;
 	}
