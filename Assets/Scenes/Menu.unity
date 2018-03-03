@@ -978,9 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 0
   nextPanel: {fileID: 1562203478}
-  currentPanel: {fileID: 1717186972}
 --- !u!114 &308496864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1479,7 +1477,7 @@ GameObject:
   - component: {fileID: 407340177}
   - component: {fileID: 407340176}
   m_Layer: 5
-  m_Name: HowToPlay
+  m_Name: HowToPlayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,9 +1913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 1
   nextPanel: {fileID: 2041466415}
-  currentPanel: {fileID: 1562203478}
 --- !u!114 &646091782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2712,9 +2708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 0
   nextPanel: {fileID: 1562203478}
-  currentPanel: {fileID: 582647932}
 --- !u!114 &889698302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3051,9 +3045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 1
   nextPanel: {fileID: 407340174}
-  currentPanel: {fileID: 1562203478}
 --- !u!114 &997809935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3245,9 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 1
   nextPanel: {fileID: 582647932}
-  currentPanel: {fileID: 1562203478}
 --- !u!114 &1009085303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4645,9 +4635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 0
   nextPanel: {fileID: 1562203478}
-  currentPanel: {fileID: 407340174}
 --- !u!114 &1542190331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4914,9 +4902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 1
   nextPanel: {fileID: 1717186972}
-  currentPanel: {fileID: 1562203478}
 --- !u!114 &1571591224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5716,9 +5702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4efd5314ddd06f4d85005d3bae5fe15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnFirstPanel: 0
   nextPanel: {fileID: 1562203478}
-  currentPanel: {fileID: 2041466415}
 --- !u!114 &1807523353
 MonoBehaviour:
   m_ObjectHideFlags: 0

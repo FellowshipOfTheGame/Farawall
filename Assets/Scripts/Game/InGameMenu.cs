@@ -31,6 +31,7 @@ public class InGameMenu : MonoBehaviour {
 
     public void ChangeScene(string scene) {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
+		GameManager.instance.inGame = false;
     }
 
     public void Exit() {

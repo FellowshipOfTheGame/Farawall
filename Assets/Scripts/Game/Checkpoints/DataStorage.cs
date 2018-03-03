@@ -25,27 +25,17 @@ public class DataStorage : MonoBehaviour {
 				doorsInfo.Add (new DoorInfo(aux.code,aux));
 			}
 		}
+		print (Resources.FindObjectsOfTypeAll<Door>().ToString());
+		print (doorsInfo);
 	}
 
 	public static void Load(){
-		GameObject.Find ("Player").transform.position = DataStorage.Player ();
-		foreach(Door aux in Resources.FindObjectsOfTypeAll<Door>()){
+		GameObject.Find ("Player").transform.position = startPosition;
+	/*	foreach(Door aux in Resources.FindObjectsOfTypeAll<Door>()){
 			if (aux.hasKey && DataStorage.Door(aux.code)) {
 				aux.Unlock();
 			}
-		}
-	}
-
-	public static Vector3 Player(){
-		return startPosition;
-	}
-
-	public static bool Door(int code){
-		foreach(DoorInfo aux in doorsInfo){
-			if (aux.code == code)
-				return aux.unlocked;
-		}
-		return false;
+		}*/
 	}
 
 }

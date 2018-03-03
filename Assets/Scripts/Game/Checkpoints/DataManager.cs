@@ -17,4 +17,9 @@ public class DataManager : MonoBehaviour {
 		DataStorage.Load ();
 	}
 
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.S)){
+			DataStorage.Save ();
+		}
+	}
 }
