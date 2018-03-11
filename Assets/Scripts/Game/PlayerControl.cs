@@ -62,6 +62,10 @@ public class PlayerControl : MonoBehaviour {
         codes.Add(code);
     }
 
+	public void removeKey(int code){
+		codes.Remove (code);
+	}
+
     public bool haveKey(int code) {
         for (int i = 0; i < codes.Count; i++) {
             if (codes[i] == code)

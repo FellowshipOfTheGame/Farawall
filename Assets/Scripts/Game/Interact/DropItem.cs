@@ -12,6 +12,7 @@ public class DropItem : MonoBehaviour {
        if (canDrop) {
             GameObject temp = Instantiate(item);
             temp.transform.position = this.transform.position + offset;
+			canDrop = false;
             return temp;
        }
         return null;

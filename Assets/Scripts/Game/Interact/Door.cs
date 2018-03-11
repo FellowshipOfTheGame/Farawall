@@ -131,6 +131,17 @@ public class Door: Interactable {
         openDoor = true;
     }
 
+	public void ToggleLock(){
+		unlocked = !unlocked;
+		if (unlocked == false) {
+			try{
+				gm.player.removeKey (code);
+			}catch{
+			}
+		}
+		setIcon (unlocked?normalIcon:lockIcon);
+	}
+
     void setColor(Color c) {
         iconPlaces[0].color = c;
         iconPlaces[1].color = c;
@@ -143,4 +154,7 @@ public class Door: Interactable {
         iconPlaces[1].sprite = s;
     }
 
+	public bool isUnlocked(){
+		return unlocked;
+	}
 }
