@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SavePoint : Interactable{
 
 	public Door doorToLock = null;
 	public Color onColor, offColor;
 	public GameObject genericBallon;
+	public Font font;
 	[Space(10)]
 
 	public float ballonOffset, ballonHeight;
@@ -14,6 +16,7 @@ public class SavePoint : Interactable{
 	public GameObject message;
 	[Space(10)]
 	public GameObject myBallon = null;
+	public string savingMessage;
 	Transform pivot;
 
 	private GameManager GM;
@@ -27,7 +30,11 @@ public class SavePoint : Interactable{
 
 	public override void Interact ()
 	{
+		message.SetActive (false);
 		GM.mainCam.focusOnObject (this.transform);
+		myBallon = Instantiate(genericBallon, GM.mainCam.canvas.transform);
+		myBallon.transform.Find ("Text").GetComponent<Text> ().text = savingMessage;
+		myBallon.transform.Find ("Text").GetComponent<Text> ().font = font;
 		if (doorToLock != null && !alreadyLockedDoor) {
 			doorToLock.ToggleLock ();
 			alreadyLockedDoor = true;
@@ -37,7 +44,10 @@ public class SavePoint : Interactable{
 
 	public override void Close ()
 	{
+		message.SetActive (true);
 		GM.mainCam.focusOnObject (GM.player.transform);
+		Destroy (myBallon);
+		myBallon = null;
 	}
 
 	public override void Near()
