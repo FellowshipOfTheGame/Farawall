@@ -7,8 +7,6 @@ public class DataStorage : MonoBehaviour {
 
 	public static DataStorage instance = null;
 
-	private static GameManager gm;
-
 	private static Vector3 startPosition;
 	private static List<string> foundKeys = new List<string> ();
 	private static List<string> usedKeys = new List<string> ();
@@ -31,10 +29,6 @@ public class DataStorage : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 	}
 
-	void Start(){
-		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
-	}
-
 	public static void Save(){
 
 		usedKeys.Clear ();
@@ -44,17 +38,17 @@ public class DataStorage : MonoBehaviour {
 		notDestroyedKeys.Clear ();
 		alreadyGivenInformation.Clear ();
 		foundInformation.Clear ();
-		startPosition = gm.player.transform.position;
-		canTranslate = gm.player.canTranslate;
-		dataButton = gm.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.activeSelf;
-		puzzleButton = gm.menu.transform.Find ("DataTab").Find ("Buttons").Find ("PuzzleButton").gameObject.activeSelf;
-		Transform aux = gm.menu.keyFloor.Find ("Keys1").gameObject.transform;
+		startPosition = GameManager.player.transform.position;
+		canTranslate = GameManager.player.canTranslate;
+		dataButton = GameManager.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.activeSelf;
+		puzzleButton = GameManager.menu.transform.Find ("DataTab").Find ("Buttons").Find ("PuzzleButton").gameObject.activeSelf;
+		Transform aux = GameManager.menu.keyFloor.Find ("Keys1").gameObject.transform;
 		for (int i = 0; i < aux.childCount; i++) {
 			if (aux.GetChild (i).gameObject.activeSelf) {
 				usedKeys.Add (aux.GetChild(i).gameObject.name);
 			}
 		}
-		aux = gm.menu.keyFloor.Find ("Keys2").gameObject.transform;
+		aux = GameManager.menu.keyFloor.Find ("Keys2").gameObject.transform;
 		for (int i = 0; i < aux.childCount; i++) {
 			if (aux.GetChild (i).gameObject.activeSelf) {
 				foundKeys.Add (aux.GetChild (i).gameObject.name);
@@ -82,30 +76,30 @@ public class DataStorage : MonoBehaviour {
 				alreadyGivenInformation.Add (temp.name);
 			}
 		}
-		aux = gm.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;
+		aux = GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;
 		for (int i = 0; i < aux.childCount; i++) {
 			if (aux.GetChild (i).gameObject.activeSelf) {
 				foundInformation.Add (aux.GetChild(i).GetChild(0).GetComponent<Text>().text);
 			}
 		}
-		puzzleInformationCounter = gm.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Counter").GetComponent<Text> ().text;
+		puzzleInformationCounter = GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Counter").GetComponent<Text> ().text;
 
 	}
 
 	public static void Load(){
 		
-		gm.player.transform.position = startPosition;
-		gm.player.canTranslate = canTranslate;
-		gm.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.SetActive (dataButton);
-		gm.menu.transform.Find ("DataTab").Find ("Buttons").Find ("PuzzleButton").gameObject.SetActive (puzzleButton);
-		Transform aux = gm.menu.keyFloor.Find ("Keys1").gameObject.transform;
+		GameManager.player.transform.position = startPosition;
+		GameManager.player.canTranslate = canTranslate;
+		GameManager.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.SetActive (dataButton);
+		GameManager.menu.transform.Find ("DataTab").Find ("Buttons").Find ("PuzzleButton").gameObject.SetActive (puzzleButton);
+		Transform aux = GameManager.menu.keyFloor.Find ("Keys1").gameObject.transform;
 		for (int i = 0; i < usedKeys.Count; i++) {
 			GameObject temp = Instantiate(aux.GetChild(0).gameObject, aux);
 			temp.name = usedKeys [i];
 			temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + usedKeys[i];
 			temp.SetActive(true);
 		}
-		aux = gm.menu.keyFloor.Find ("Keys2").gameObject.transform;
+		aux = GameManager.menu.keyFloor.Find ("Keys2").gameObject.transform;
 		for (int i = 0; i < foundKeys.Count; i++) {
 			GameObject temp = Instantiate(aux.GetChild(0).gameObject, aux);
 			temp.name = foundKeys [i];
@@ -139,13 +133,13 @@ public class DataStorage : MonoBehaviour {
 				temp.isNew = false;
 			}
 		}
-		aux = gm.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;
+		aux = GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;
 		for (int i = 0; i < foundInformation.Count; i++) {
 			GameObject temp = Instantiate(aux.GetChild(0).gameObject, aux);
 			temp.transform.GetChild(0).GetComponent<Text>().text = foundInformation[i];
 			temp.SetActive(true);
 		}
-		gm.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Counter").GetComponent<Text> ().text = puzzleInformationCounter;
+		GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Counter").GetComponent<Text> ().text = puzzleInformationCounter;
 
 	}
 

@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Key : Interactable {
-    GameManager gm;
 	public Door door;
     Transform keyModel;
     public TextMesh codePlace;
     void Start() {
-        gm = GameManager.instance;
         keyModel = transform.Find("3dModel");
         codePlace.text = "K-" + door.code.ToString();
         codePlace.gameObject.SetActive(false);
@@ -18,13 +16,13 @@ public class Key : Interactable {
     void Update() {
         keyModel.Rotate(Vector3.up, 30.0f * Time.deltaTime);
         if (nearPlayer)
-            codePlace.transform.forward = gm.player.transform.forward;
+			codePlace.transform.forward = GameManager.player.transform.forward;
     }
 
 	public override void Interact (){
-        gm.player.addKey(door.code);
+		GameManager.player.addKey(door.code);
         Debug.Log("Got key " + door.code);
-        GameObject temp = Instantiate(gm.menu.keyFloor.Find("Keys2").GetChild(0).gameObject, gm.menu.keyFloor.Find("Keys2"));
+		GameObject temp = Instantiate(GameManager.menu.keyFloor.Find("Keys2").GetChild(0).gameObject, GameManager.menu.keyFloor.Find("Keys2"));
         temp.name = door.code.ToString();
         temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + door.code.ToString();
         temp.SetActive(true);

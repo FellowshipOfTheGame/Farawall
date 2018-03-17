@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class InGameMenu : MonoBehaviour {
-    GameManager gm;
     public GameObject mainTab;
     public Transform keyFloor;
     GameObject activeTab;
@@ -12,8 +11,7 @@ public class InGameMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gm = GameManager.instance;
-        gm.menu = this.GetComponent<InGameMenu>();
+		GameManager.menu = this.GetComponent<InGameMenu>();
         Reset();
         gameObject.SetActive(false);
     }
@@ -26,12 +24,11 @@ public class InGameMenu : MonoBehaviour {
     }
 
     public void Resume() {
-        gm.pausePlay();
+		GameManager.pausePlay();
     }
 
     public void ChangeScene(string scene) {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
-		GameManager.instance.inGame = false;
     }
 
     public void Exit() {

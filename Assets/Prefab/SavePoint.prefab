@@ -461,12 +461,14 @@ MonoBehaviour:
   offColor: {r: 0.3019608, g: 0.24705882, b: 0.24705882, a: 1}
   genericBallon: {fileID: 1765162015217688, guid: 4f3dc9d6ee509a241a740f589ad11c4a,
     type: 2}
+  font: {fileID: 0}
   ballonOffset: 1
   ballonHeight: 2
   camDist: 2
   camHeight: 1
   message: {fileID: 1215225370435968}
   myBallon: {fileID: 0}
+  savingMessage: Progress has been saved
 --- !u!135 &135508697645828346
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -5,17 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager instance;
-    public bool inGame;
-    [HideInInspector] public CameraControl mainCam;
-    [HideInInspector] public PlayerControl player;
-    [HideInInspector] public InGameMenu menu;
-    [HideInInspector] public bool paused = false;
-    [HideInInspector] public List<PuzzleInfo> activedPuzzles;
+	public static GameManager instance = null;
+	public bool sceneInGame;
+	public static bool inGame;
+	public static CameraControl mainCam;
+	public static PlayerControl player;
+	public static InGameMenu menu;
+	public static bool paused = false;
+	public static List<PuzzleInfo> activedPuzzles;
+
 
     void Awake() {
         if (instance == null) {
             instance = this;
+			inGame = sceneInGame;
         } else if (instance != this) {
             Destroy(gameObject);
         }
@@ -24,8 +27,10 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        if (inGame)
-            startGame();
+		if (inGame) {
+			startGame ();
+
+		}
     }
 	
 	// Update is called once per frame
@@ -34,18 +39,33 @@ public class GameManager : MonoBehaviour {
             pausePlay();
 	}
 
-    public void loadGameScene(string scene) {
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        startGame();
+    public static void loadGameScene(string scene) {
+		string previousScene = SceneManager.GetActiveScene ().name;
+		if (scene == "Reload")
+			scene = previousScene;
+		SceneManager.LoadScene(scene, LoadSceneMode.Single);
+		Time.timeScale = 1.0f;
+		if (previousScene == "Menu") {
+			startGame ();
+		} else if (scene == "Menu") {
+			endGame ();
+		}
+        
     }
 
-    void startGame() {
+    static void startGame() {
         activedPuzzles = new List<PuzzleInfo>();
         paused = false;
         inGame = true;
     }
 
-    public void pausePlay() {
+	static void endGame(){
+		inGame = false;
+		paused = false;
+		activedPuzzles = null;
+	}
+
+	public static void pausePlay() {
         if (paused) {
             menu.gameObject.SetActive(false);
             menu.Reset();
@@ -58,7 +78,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void ActivePuzzle(PuzzleInfo p) {
+    public static void ActivePuzzle(PuzzleInfo p) {
         if (activedPuzzles.Count == 0)
             menu.transform.Find("DataTab").Find("Buttons").Find("PuzzleButton").gameObject.SetActive(true);
 
@@ -70,7 +90,8 @@ public class GameManager : MonoBehaviour {
             p.solutions[i].GetComponent<Solutioner>().puzzleId = p.id;
     }
 
-    public void ShowGameOver() {
-        //gameOver.SetActive(true);
+    public static void ShowGameOver() {
+		GameObject.Find ("Canvas").transform.Find ("GameOver").gameObject.SetActive(true);
+		Time.timeScale = 0.0f;
     }
 }

@@ -19,11 +19,9 @@ public class SavePoint : Interactable{
 	public string savingMessage;
 	Transform pivot;
 
-	private GameManager GM;
 	private bool alreadyLockedDoor = false;
 
 	void Start(){
-		GM = GameManager.instance;
 		pivot = transform.Find ("Pivot");
 		this.transform.Find("Model3D").Find("Eye").gameObject.SetActive(false);
 	}
@@ -31,8 +29,8 @@ public class SavePoint : Interactable{
 	public override void Interact ()
 	{
 		message.SetActive (false);
-		GM.mainCam.focusOnObject (this.transform);
-		myBallon = Instantiate(genericBallon, GM.mainCam.canvas.transform);
+		GameManager.mainCam.focusOnObject (this.transform);
+		myBallon = Instantiate(genericBallon, GameManager.mainCam.canvas.transform);
 		myBallon.transform.Find ("Text").GetComponent<Text> ().text = savingMessage;
 		myBallon.transform.Find ("Text").GetComponent<Text> ().font = font;
 		if (doorToLock != null && !alreadyLockedDoor) {
@@ -45,20 +43,20 @@ public class SavePoint : Interactable{
 	public override void Close ()
 	{
 		message.SetActive (true);
-		GM.mainCam.focusOnObject (GM.player.transform);
+		GameManager.mainCam.focusOnObject (GameManager.player.transform);
 		Destroy (myBallon);
 		myBallon = null;
 	}
 
 	public override void Near()
 	{
-		Vector3 dist = (GM.player.transform.position - transform.position).normalized * camDist;
+		Vector3 dist = (GameManager.player.transform.position - transform.position).normalized * camDist;
 		pivot.position = transform.position + new Vector3(dist.x, camHeight, dist.z);
 		float aux = pivot.eulerAngles.x;
 		pivot.transform.LookAt(this.transform);
 		pivot.eulerAngles = new Vector3(aux, pivot.eulerAngles.y, pivot.eulerAngles.z);
 
-		Vector3 temp = new Vector3(GM.player.transform.position.x - transform.position.x, 0.0f, GM.player.transform.position.z - transform.position.z).normalized;
+		Vector3 temp = new Vector3(GameManager.player.transform.position.x - transform.position.x, 0.0f, GameManager.player.transform.position.z - transform.position.z).normalized;
 		message.transform.localPosition = temp;
 		message.transform.forward = temp;
 		message.SetActive(true);

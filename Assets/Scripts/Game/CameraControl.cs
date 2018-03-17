@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = this.GetComponent<AutoCam>();
-        GameManager.instance.mainCam = this.GetComponent<CameraControl>();
+        GameManager.mainCam = this.GetComponent<CameraControl>();
         pivot = transform.Find("Pivot");
         focus = cam.Target.Find("Pivot");
     }

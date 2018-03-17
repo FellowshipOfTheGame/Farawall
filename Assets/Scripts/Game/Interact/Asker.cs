@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Asker : MonoBehaviour {
 
-    GameManager gm;
     bool isNew = true;
     public bool endPuzzle;
     PuzzleInfo puzzle;
@@ -13,7 +12,6 @@ public class Asker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gm = GameManager.instance;
         myStatue = this.GetComponent<StatueControl>();
         puzzle = this.GetComponent<PuzzleInfo>();
 	}
@@ -24,7 +22,7 @@ public class Asker : MonoBehaviour {
 
     public void activePuzzle() {
         if (isNew) {
-            gm.ActivePuzzle(puzzle);
+			GameManager.ActivePuzzle(puzzle);
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
             k.door = puzzle.startDoor;
             isNew = false;

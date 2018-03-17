@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Door: Interactable {
-    GameManager gm;
     Transform pivot;
     public float camDistance;
 	public Transform startPosition;
@@ -30,7 +29,6 @@ public class Door: Interactable {
 	private bool unlocked;
 
 	void Start () {
-        gm = GameManager.instance;
         pivot = transform.Find("Pivot");
 		distance = Vector3.Distance (startPosition.position, endPosition.position);
 		unlocked = !hasKey;
@@ -73,14 +71,14 @@ public class Door: Interactable {
 	}
 
 	public override void Interact (){
-        gm.mainCam.focusOnObject(this.transform);
+		GameManager.mainCam.focusOnObject(this.transform);
 		if (!inMovement) {
 			startTime = Time.time;
             if (isOpen)
                 closeDoor = true;
             else if (!hasKey || unlocked)
                 openDoor = true;
-            else if (hasKey && gm.player.haveKey(code))
+			else if (hasKey && GameManager.player.haveKey(code))
                 Unlock();
 
             inMovement = closeDoor || openDoor;
@@ -88,18 +86,18 @@ public class Door: Interactable {
 	}
 
 	public override void Close (){
-        gm.mainCam.focusOnObject(gm.player.transform);
+		GameManager.mainCam.focusOnObject(GameManager.player.transform);
     }
 
     public override void Near() {
-        if (Vector3.Distance(gm.player.transform.position, transform.position) < Vector3.Distance(gm.player.transform.position, pivot.position)) {
+		if (Vector3.Distance(GameManager.player.transform.position, transform.position) < Vector3.Distance(GameManager.player.transform.position, pivot.position)) {
             pivot.localPosition = -pivot.localPosition;
             pivot.Rotate(Vector3.up, 180.0f);
         }
 
         if (unlocked)
             setColor(onColor);
-        else if (gm.player.haveKey(code)) {
+		else if (GameManager.player.haveKey(code)) {
             setColor(unlockColor);
             setIcon(unlockIcon);
         } else
@@ -123,8 +121,8 @@ public class Door: Interactable {
 
 	public void Unlock(){
 		unlocked = true;
-        Destroy(gm.menu.keyFloor.Find("Keys2").Find(code.ToString()).gameObject);
-        GameObject temp = Instantiate(gm.menu.keyFloor.Find("Keys1").GetChild(0).gameObject, gm.menu.keyFloor.Find("Keys1"));
+		Destroy(GameManager.menu.keyFloor.Find("Keys2").Find(code.ToString()).gameObject);
+		GameObject temp = Instantiate(GameManager.menu.keyFloor.Find("Keys1").GetChild(0).gameObject, GameManager.menu.keyFloor.Find("Keys1"));
         temp.name = code.ToString();
         temp.transform.GetChild(0).GetComponent<Text>().text = "K-" + code.ToString();
         temp.SetActive(true);
@@ -135,7 +133,7 @@ public class Door: Interactable {
 		unlocked = !unlocked;
 		if (unlocked == false) {
 			try{
-				gm.player.removeKey (code);
+				GameManager.player.removeKey (code);
 			}catch{
 			}
 		}

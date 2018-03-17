@@ -7,7 +7,7 @@ public class TranslateUnlocker : Unlocker {
     public override void GiveUpgrade() {
         
         if (!alreadyGive) {
-            GM.player.canTranslate = true;
+			GameManager.player.canTranslate = true;
             myStatue.myBallon.transform.Find("Text").GetComponent<Text>().font = myStatue.normalFont;
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>();
             k.door = door;

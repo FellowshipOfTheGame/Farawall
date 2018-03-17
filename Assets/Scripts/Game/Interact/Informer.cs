@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Informer : MonoBehaviour {
 
-    GameManager gm;
     public int puzzleId;
     string info;
     public bool isNew = true;
 	// Use this for initialization
 	void Start () {
-        gm = GameManager.instance;
         StatueData data = this.GetComponent<StatueControl>().data;
         info = data.name + ": " + data.normalMessage;
 	}
@@ -22,15 +20,15 @@ public class Informer : MonoBehaviour {
 
     public void sendMessage() {
         if (isNew) {
-            gm.activedPuzzles[puzzleId].AddInfo(info);
+			GameManager.activedPuzzles[puzzleId].AddInfo(info);
             isNew = false;
         }
     }
 
     public void checkPuzzle() {
-        if (gm.activedPuzzles[puzzleId].isFull()) {
+		if (GameManager.activedPuzzles[puzzleId].isFull()) {
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
-            k.door = gm.activedPuzzles[puzzleId].endDoor;
+			k.door = GameManager.activedPuzzles[puzzleId].endDoor;
         }
     }
 }

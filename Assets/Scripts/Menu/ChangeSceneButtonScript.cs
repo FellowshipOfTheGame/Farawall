@@ -16,6 +16,6 @@ public class ChangeSceneButtonScript : MonoBehaviour {
 	}
 
 	void ChangeScene(){
-		SceneManager.LoadScene (scene, LoadSceneMode.Single);
+		GameManager.loadGameScene (scene);
 	}
 }

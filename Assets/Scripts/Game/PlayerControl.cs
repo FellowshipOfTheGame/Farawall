@@ -5,7 +5,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerControl : MonoBehaviour {
 
-    public GameManager gm;
     ThirdPersonUserControl movement;
     bool isTalking = false;
 
@@ -17,8 +16,7 @@ public class PlayerControl : MonoBehaviour {
     Interactable currInter = null;
     // Use this for initialization
     void Start () {
-        gm = GameManager.instance;
-        gm.player = this.GetComponent<PlayerControl>();
+		GameManager.player = this.GetComponent<PlayerControl>();
         movement = this.GetComponent<ThirdPersonUserControl>();
         codes = new List<int>();
 	}
@@ -75,6 +73,6 @@ public class PlayerControl : MonoBehaviour {
     }
 
     public void TakeDamage() {
-        gm.ShowGameOver();
+		GameManager.ShowGameOver();
     }
 }

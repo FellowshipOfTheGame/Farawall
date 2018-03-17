@@ -4,15 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Solutioner : MonoBehaviour {
-    GameManager gm;
     public int puzzleId;
     public string answer;
     public static Solutioner chosen = null;
     public Color chosenColor;
-	// Use this for initialization
-	void Start () {
-        gm = GameManager.instance;
-	}
 
     public void chooseThis() {
         if (chosen != null) {
@@ -25,6 +20,6 @@ public class Solutioner : MonoBehaviour {
     }
 
     public void check() {
-        Debug.Log(gm.activedPuzzles[puzzleId].checkAnswer(answer));
+		Debug.Log(GameManager.activedPuzzles[puzzleId].checkAnswer(answer));
     }
 }
