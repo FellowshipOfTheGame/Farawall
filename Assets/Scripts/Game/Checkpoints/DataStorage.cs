@@ -15,6 +15,8 @@ public class DataStorage : MonoBehaviour {
 	private static List<string> notDestroyedKeys = new List<string> ();
 	private static List<string> alreadyGivenInformation = new List<string> ();
 	private static List<string> foundInformation = new List<string> ();
+	private static List<string> givenUpgrades = new List<string>();
+	private static List<int> codes;
 	private static string puzzleInformationCounter;
 	private static bool canTranslate;
 	private static bool dataButton;
@@ -38,6 +40,8 @@ public class DataStorage : MonoBehaviour {
 		notDestroyedKeys.Clear ();
 		alreadyGivenInformation.Clear ();
 		foundInformation.Clear ();
+		givenUpgrades.Clear ();
+		codes = new List<int> (GameManager.player.codes);
 		startPosition = GameManager.player.transform.position;
 		canTranslate = GameManager.player.canTranslate;
 		dataButton = GameManager.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.activeSelf;
@@ -76,6 +80,12 @@ public class DataStorage : MonoBehaviour {
 				alreadyGivenInformation.Add (temp.name);
 			}
 		}
+		Unlocker[] unlocked = FindObjectsOfType<Unlocker> ();
+		foreach (Unlocker temp in unlocked) {
+			if (temp.alreadyGive) {
+				givenUpgrades.Add (temp.name);
+			}
+		}
 		aux = GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;
 		for (int i = 0; i < aux.childCount; i++) {
 			if (aux.GetChild (i).gameObject.activeSelf) {
@@ -87,7 +97,8 @@ public class DataStorage : MonoBehaviour {
 	}
 
 	public static void Load(){
-		
+
+		GameManager.player.codes = new List<int> (codes);
 		GameManager.player.transform.position = startPosition;
 		GameManager.player.canTranslate = canTranslate;
 		GameManager.menu.transform.Find ("MainTab").Find ("Buttons").Find ("DataButton").gameObject.SetActive (dataButton);
@@ -131,6 +142,12 @@ public class DataStorage : MonoBehaviour {
 		foreach (Informer temp in informers) {
 			if (alreadyGivenInformation.Contains (temp.name)) {
 				temp.isNew = false;
+			}
+		}
+		Unlocker[] unlocked = FindObjectsOfType<Unlocker> ();
+		foreach (Unlocker temp in unlocked) {
+			if (givenUpgrades.Contains (temp.name)) {
+				temp.alreadyGive = true;
 			}
 		}
 		aux = GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Infos").transform;

@@ -7,7 +7,7 @@ public class Unlocker : MonoBehaviour {
     public Door door;
     public string returnMsg;
     protected StatueControl myStatue;
-    protected bool alreadyGive = false;
+    public bool alreadyGive = false;
 
     // Use this for initialization
     void Start() {

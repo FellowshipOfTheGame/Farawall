@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour {
+public class SpikesTrap : MonoBehaviour {
 	public Transform startPosition;
 	public Transform endPosition;
 	public Transform spears;

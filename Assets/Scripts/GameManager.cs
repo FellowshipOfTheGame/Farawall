@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour {
 
     public static void loadGameScene(string scene) {
 		string previousScene = SceneManager.GetActiveScene ().name;
-		if (scene == "Reload")
-			scene = previousScene;
-		SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		Time.timeScale = 1.0f;
+		if (scene == "Reload") {
+			scene = previousScene;
+		}
+		SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		if (previousScene == "Menu") {
 			startGame ();
 		} else if (scene == "Menu") {

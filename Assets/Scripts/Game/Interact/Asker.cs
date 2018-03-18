@@ -8,11 +8,11 @@ public class Asker : MonoBehaviour {
     bool isNew = true;
     public bool endPuzzle;
     PuzzleInfo puzzle;
-    StatueControl myStatue;
+//  StatueControl myStatue;
 
 	// Use this for initialization
 	void Start () {
-        myStatue = this.GetComponent<StatueControl>();
+//      myStatue = this.GetComponent<StatueControl>();
         puzzle = this.GetComponent<PuzzleInfo>();
 	}
 

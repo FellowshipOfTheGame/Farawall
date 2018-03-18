@@ -9,8 +9,8 @@ public class DataUnlocker : Unlocker {
     public override void GiveUpgrade() {
         if (!alreadyGive) {
             dataButton.SetActive(true);
-            Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>();
-            k.door = door;
+			Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>();
+			k.door = door;
             alreadyGive = true;
         } else
             myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = returnMsg;
