@@ -15,15 +15,13 @@ public class Arrow : MonoBehaviour {
 	}
 
 	void Update(){
-		if (this.transform == endPosition.transform) {
-			Destroy (this);
-			return;
-		}
 		float coveredDistance;
 		float currentPosition;
 		coveredDistance = (Time.time - startTime) * speed;
 		currentPosition = coveredDistance / distance;
 		this.transform.position = Vector3.Lerp (startPosition.position, endPosition.position,currentPosition);
+		if (currentPosition >= 1)
+			Destroy (this.gameObject);
 	}
 
 	void OnTiggerEnter(Collider other){
