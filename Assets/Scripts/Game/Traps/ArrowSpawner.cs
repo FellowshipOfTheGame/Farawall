@@ -17,6 +17,7 @@ public class ArrowSpawner : Spawner {
 		Arrow temp = Instantiate (arrow,transform).GetComponent<Arrow> ();
 		temp.startPosition = this.transform;
 		temp.endPosition = target;
+		temp.transform.LookAt(target);
 		temp.speed = speed;
 		temp.gameObject.SetActive (true);
 	}
