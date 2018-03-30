@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
 public class Test : MonoBehaviour {
-
+	//substitute for DataStorage
 	public static Test instance = null;
-	private string path = "/data.jason";
 
-	//	private static bool saved = false;
-	[SerializeField]
+	[HideInInspector]
 	public Data data = new Data();
+	public bool saveInFile = false;
+	public string path = "/data";
+	public bool encypt = false;
+	//	private static bool saved = false;
 
 	void Awake(){
 		if (instance == null) {
@@ -151,16 +154,37 @@ public class Test : MonoBehaviour {
 		GameManager.menu.transform.Find ("DataTab").Find ("PuzzleData").Find ("P1Tab").Find ("Counter").GetComponent<Text> ().text = data.puzzleInformationCounter;//carregando o numero de informacoes ja obtidas
 
 	}
+
+	private string Encrypt(string text){
+		char[] aux = new char[text.Length];
+		string key = SystemInfo.deviceModel+SystemInfo.deviceName+SystemInfo.deviceType;
+		for (int i = 0, j = 0; i < text.Length; i++, j = (j + 1) % key.Length)
+			aux [i] = (char)(text [i] + key [j]);
+		return new string(aux);
+	}
+
+	private string Decrypt(string text){
+		char[] aux = new char[text.Length];
+		string key = SystemInfo.deviceModel+SystemInfo.deviceName+SystemInfo.deviceType;
+		for (int i = 0, j = 0; i < text.Length; i++, j = (j + 1) % key.Length)
+			aux [i] = (char)(text [i] -key [j]);
+		return new string(aux);
+	}
 	void Update () {
 		string fp = Application.dataPath + path;
 		if (Input.GetKeyDown (KeyCode.M)) {
 			if (File.Exists (fp)) {
 				string daj = File.ReadAllText (fp);
+				if (encypt)
+					daj = Decrypt (daj);
 				Test.instance.data = JsonUtility.FromJson<Data> (daj);
 				instance.Load ();
-			}
+			} else
+				Debug.Log ("File doesn't exist");
 		} else if (Input.GetKeyDown (KeyCode.L)) {
 			string daj = JsonUtility.ToJson (Test.instance.data);
+			if (encypt)
+				daj = Encrypt (daj);
 			File.WriteAllText (fp,daj);
 		}
 	}
@@ -169,4 +193,3 @@ public class Test : MonoBehaviour {
 		return saved;
 	}*/
 }
-
