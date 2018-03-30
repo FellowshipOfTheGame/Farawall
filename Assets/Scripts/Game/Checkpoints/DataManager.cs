@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour {
 	
-	void Awake() {
-
-	}
-		
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.M)) {
+//		if (Input.GetKeyDown (KeyCode.M)) {
 //			DataStorage.Save ();
 //		} else if (Input.GetKeyDown (KeyCode.L)) {
-			DataStorage.Load ();
-		}
+//			DataStorage.Load ();
+//		}
 		if (DataStorage.instance == null) {
 			GameObject aux = new GameObject ();
 			aux.gameObject.name = "DataStorage";
