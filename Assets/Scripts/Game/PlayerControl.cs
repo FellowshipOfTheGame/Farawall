@@ -8,6 +8,9 @@ public class PlayerControl : MonoBehaviour {
     ThirdPersonUserControl movement;
     bool isTalking = false;
 
+	public int maxLife;
+	[SerializeField]
+	private int currentLife;
     public bool canPlay = false;
     public bool canTranslate = false;
     public 
@@ -19,6 +22,7 @@ public class PlayerControl : MonoBehaviour {
 		GameManager.player = this.GetComponent<PlayerControl>();
         movement = this.GetComponent<ThirdPersonUserControl>();
         codes = new List<int>();
+		currentLife = maxLife;
 	}
 
     // Update is called once per frame
@@ -72,7 +76,10 @@ public class PlayerControl : MonoBehaviour {
         return false;
     }
 
-    public void TakeDamage() {
-		GameManager.ShowGameOver();
+	public void TakeDamage(int damage) {
+		currentLife -= damage;
+		if (currentLife <= 0) {
+			GameManager.ShowGameOver ();
+		}
     }
 }

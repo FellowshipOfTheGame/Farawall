@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DangerousObject : MonoBehaviour {
+	public int damage;
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -16,6 +16,6 @@ public class DangerousObject : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other) {
         if (other.tag == "Player")
-            other.GetComponent<PlayerControl>().TakeDamage();
+            other.GetComponent<PlayerControl>().TakeDamage(damage);
     }
 }
