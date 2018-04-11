@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 
 public class Save_Load : MonoBehaviour {
 	//substitute for dataManager
