@@ -33,6 +33,13 @@ public class SettingsController : MonoBehaviour {
 			musicSource = music.GetComponent<AudioSource> ();
 		}
 		fullScreen.isOn = Screen.fullScreen;
+		Debug.Log (Screen.width.ToString()+" x "+Screen.height.ToString()+" @ "+Screen.currentResolution.refreshRate.ToString()+"Hz");
+		foreach (Dropdown.OptionData aux in resolutionOption.options) {
+			if (aux.text.ToString ().Equals (Screen.width.ToString()+" x "+Screen.height.ToString()+" @ "+Screen.currentResolution.refreshRate.ToString()+"Hz")) {
+				resolutionOption.value = resolutionOption.options.IndexOf (aux);
+				break;
+			}
+		}
 		textureQuality.value = QualitySettings.masterTextureLimit;
 		volume.value = musicSource.volume;
 		mute.isOn = musicSource.mute;
