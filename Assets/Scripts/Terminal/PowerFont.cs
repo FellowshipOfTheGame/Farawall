@@ -5,23 +5,24 @@ using UnityEngine.UI;
 
 public class PowerFont : PowerLine {
 
-	// Use this for initialization
-	void Awake () {
-        on = true;
-        spr = this.GetComponent<Image>();
-        spr.color = Color.yellow;
-        myLine = this.GetComponent<PowerFont>();
-    }
+    public List<PowerLine> links;
 
     void Start() {
-        foreach (PowerLine aux in connections) {
+        on = true;
+        sprs[0].color = onColor;
+    }
+
+    public void sendEnergy() {
+        foreach (PowerLine aux in links) {
             if (aux != null)
-                aux.turnOn(myLine);
+                aux.turnOn(this);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
+    public void cutEnergy() {
+        foreach (PowerLine aux in links) {
+            if (aux != null)
+                aux.turnOff(this);
+        }
+    }
 }

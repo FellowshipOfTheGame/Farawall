@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
         }
 
@@ -47,7 +47,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (m_canMove) {
                 // read inputs
                 h = CrossPlatformInputManager.GetAxis("Horizontal");
-                v = CrossPlatformInputManager.GetAxis("Vertical");
+                v = Mathf.Clamp(CrossPlatformInputManager.GetAxis("Vertical"), 0.0f, 1.0f);
                 crouch = Input.GetKey(KeyCode.C);
             }
 

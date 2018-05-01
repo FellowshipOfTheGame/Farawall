@@ -5,49 +5,52 @@ using UnityEngine.UI;
 
 public class PowerLine : MonoBehaviour {
 
-    public bool on = false;
-    public PowerLine[] connections;
-    public List<PowerLine> fonts = new List<PowerLine>();
-    protected PowerLine myLine;
-    protected Image spr;
-	// Use this for initialization
-	void Awake () {
-        myLine = this.GetComponent<PowerLine>();
-        spr = this.GetComponent<Image>();
-        spr.color = Color.gray;
+
+    [HideInInspector] public bool on = false, haveFont = false;
+    public PowerLine[] connections = new PowerLine[8];
+    protected List<Image> sprs = new List<Image>();
+    protected Color onColor;
+
+    // Use this for initialization
+    void Awake() {
+        for (int i = 0; i < transform.childCount; i++)
+            sprs.Add(transform.GetChild(i).GetComponent<Image>());
+
+        onColor = sprs[0].color;
+
+        foreach (Image spr in sprs) { spr.color = Color.clear; }
+
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
-
-    public void turnOn(PowerLine font) {
-        if (!fonts.Contains(font))
-            fonts.Add(font);
-        if (!on) {
-            foreach (PowerLine aux in connections) {
-                if (aux != null && aux != font)
-                    aux.turnOn(myLine);
-                
+    public virtual void turnOn(PowerLine first) {
+        if (first != this) {
+            if (!on) {
+                on = true;
+                foreach (Image spr in sprs) spr.color = onColor;
+                foreach (PowerLine p in connections) {
+                    if (p != null && p.gameObject.activeInHierarchy)
+                        p.turnOn(first);
+                }
             }
-            on = true;
-            spr.color = Color.yellow;
         }
     }
 
-    public void turnOff(PowerLine font) {
-        if (fonts.Contains(font))
-            fonts.Remove(font);
-        
-        if (on && fonts.Count == 0) {
-            foreach(PowerLine aux in connections) {
-                if (aux != null && aux != font)
-                    aux.turnOff(myLine);
+    public virtual void turnOff(PowerLine first) {
+        if (first != this) {
+            if (on) {
+                on = false;
+                foreach (Image spr in sprs) spr.color = Color.clear;
+                foreach (PowerLine p in connections) {
+                    if (p != null && p.gameObject.activeInHierarchy)
+                        p.turnOff(first);
+                }
             }
-            on = false; 
-            spr.color = Color.gray;
-            Debug.Log("desliga " + name);
         }
+    }
+
+    public int getReference(PowerLine s) {
+        int i = 7;
+        while (i >= 0 && connections[i] != s) i--;
+        return i;
     }
 }
