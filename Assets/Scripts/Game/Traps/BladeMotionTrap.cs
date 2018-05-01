@@ -13,14 +13,16 @@ public class BladeMotionTrap : MonoBehaviour {
 	private float currentAngle = 0;
 
 	void Start (){
-		pivot = transform.Find ("Pivot").gameObject.transform.position;
+		pivot = Vector3.up;
 		blade = transform.Find ("Blade").gameObject;
 		near = false;
 	}
 
 	void Update () {
 		if (near) {
-			blade.transform.rotation = Quaternion.Euler (new Vector3 (currentAngle, 0, 0));
+			blade.transform.position += blade.transform.rotation * pivot;
+			blade.transform.rotation = Quaternion.AngleAxis (currentAngle, Vector3.right);
+			blade.transform.position -= blade.transform.rotation * pivot;
 			if (currentAngle > limitAngle || currentAngle < -limitAngle) {
 				speed *= -1;
 			}
