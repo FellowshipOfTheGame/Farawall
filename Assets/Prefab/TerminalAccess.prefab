@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 65192800587572760}
   - component: {fileID: 114946553245723288}
   m_Layer: 0
-  m_Name: MiniGame
+  m_Name: TerminalAccess
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910a79054780e804fa31688b8de20300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isItem: 0
+  icon: {fileID: 0}
 --- !u!212 &212847243155509402
 SpriteRenderer:
   m_ObjectHideFlags: 1
