@@ -12,6 +12,7 @@ public class PuzzleInfo : MonoBehaviour {
     public Inquisitor finalStatue;
     public Door startDoor, endDoor;
     public List<string> infos;
+    public List<ItemPuzzle> items;
     GameObject genInfo;
     Text counter;
 	// Use this for initialization

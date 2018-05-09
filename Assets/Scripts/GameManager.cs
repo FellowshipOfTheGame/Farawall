@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public static bool inGame;
 	public static CameraControl mainCam;
 	public static PlayerControl player;
+    public static TerminalAccess activedTerminal = null;
 	public static InGameMenu menu;
 	public static bool paused = false;
 	public static List<PuzzleInfo> activedPuzzles;

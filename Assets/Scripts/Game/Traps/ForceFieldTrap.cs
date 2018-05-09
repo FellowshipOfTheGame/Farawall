@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class ForceFieldTrap : MonoBehaviour {
 
-	private GameObject forceField;
+	public GameObject forceField;
 	public bool activated = true;
+    bool visible = false;
+    public Material fireMat;
 
 	void Start () {
-		forceField = transform.Find ("ForceField").gameObject;
 		forceField.SetActive (false);
 	}
 
+    void Update() {
+        if (activated && visible)
+            fireMat.mainTextureOffset += Vector2.one * 0.1f * Time.deltaTime;
+    }
+
 	void OnTriggerEnter(Collider other){
-		if (activated)
-			forceField.SetActive (true);
+        if (activated) {
+            forceField.SetActive(true);
+            visible = true;
+        }
 	}
 
 	void OnTriggerExit(Collider other){
-		if (activated)
-			forceField.SetActive (false);
+        if (activated) {
+            forceField.SetActive(false);
+            visible = false;
+        }
 	}
 }

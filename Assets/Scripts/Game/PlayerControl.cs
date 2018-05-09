@@ -42,6 +42,11 @@ public class PlayerControl : MonoBehaviour {
         }    
     }
 
+    public void unlock() {
+        isTalking = false;
+        movement.setCanMove(true);
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Interactable") {
             if (currInter != null)

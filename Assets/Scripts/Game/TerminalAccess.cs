@@ -5,33 +5,53 @@ using UnityEngine.SceneManagement;
 
 public class TerminalAccess : Interactable {
 
-    public SpriteRenderer icon;
+    SpriteRenderer icon;
+    public Sprite onSpr, offSpr;
     public int index;
+    public List<ForceFieldTrap> forceFields;
+    bool activated = true;
+
     void Start() {
-        icon.color = Color.black;
+        icon = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        icon.sprite = offSpr;
     }
 
     void open() {
-        icon.color = Color.black;
+        icon.sprite = offSpr;
         SceneManager.LoadScene("TerminalAccess" + index, LoadSceneMode.Additive);
     }
 
+    public void endAccess() {
+        Close();
+        activated = false;
+        foreach (ForceFieldTrap ff in forceFields) ff.activated = false;
+        GameManager.player.unlock();
+    }
+
     public override void Interact() {
-        GameManager.mainCam.focusOnObject(this.transform);
-        Invoke("open", 0.5f);
+        if (activated) {
+            GameManager.mainCam.focusOnObject(this.transform);
+            GameManager.activedTerminal = this;
+            Invoke("open", 10 * Time.deltaTime);
+        }
     }
 
     public override void Close() {
-        GameManager.mainCam.focusOnObject(GameManager.player.transform);
-        SceneManager.UnloadSceneAsync("TerminalAccess" + index);
-        icon.color = Color.white;
+        if (activated) {
+            GameManager.mainCam.focusOnObject(GameManager.player.transform);
+            GameManager.activedTerminal = null;
+            SceneManager.UnloadSceneAsync("TerminalAccess" + index);
+            icon.sprite = onSpr;
+        }
     }
 
     public override void Near() {
-        icon.color = Color.white;
+        if (activated)
+            icon.sprite = onSpr;
     }
 
     public override void Away() {
-        icon.color = Color.black;
+        if (activated)
+            icon.sprite = offSpr;
     }
 }

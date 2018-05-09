@@ -36,6 +36,6 @@ public class PowerManager : MonoBehaviour {
     }
 
     public void finish() {
-        Debug.Log("FIM");
+        GameManager.activedTerminal.endAccess();
     }
 }
