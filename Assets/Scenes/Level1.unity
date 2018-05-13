@@ -256,7 +256,7 @@ Transform:
   - {fileID: 597784984}
   - {fileID: 1859547470}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &24014261 stripped
 MonoBehaviour:
@@ -7792,7 +7792,7 @@ Transform:
   - {fileID: 324298364}
   - {fileID: 1767007807}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1402718624 stripped
 Transform:
@@ -10939,7 +10939,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1935170322}
   - component: {fileID: 1935170321}
-  - component: {fileID: 1935170323}
   m_Layer: 0
   m_Name: LoadGame
   m_TagString: Untagged
@@ -10971,17 +10970,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1935170323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1935170320}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a432b1e6639c57f43b2e0ab51a3f400a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1941033198
 Prefab:
   m_ObjectHideFlags: 0
