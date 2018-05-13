@@ -37,7 +37,7 @@ public class SavePoint : Interactable{
 			doorToLock.ToggleLock ();
 			alreadyLockedDoor = true;
 		}
-		DataStorage.Save ();
+		DataStorage.instance.Save ();
 	}
 
 	public override void Close ()
