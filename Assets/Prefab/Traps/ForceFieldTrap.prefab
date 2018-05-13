@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 4865778268446214}
   - component: {fileID: 65858235953542118}
   - component: {fileID: 114645924805261972}
+  - component: {fileID: 114035755109580368}
   m_Layer: 0
   m_Name: ForceFieldTrap
   m_TagString: Untagged
@@ -749,6 +750,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550841864001392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67959037bfb098b47b317aaf52cec5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+--- !u!114 &114035755109580368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173635060422858}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67959037bfb098b47b317aaf52cec5f6, type: 3}

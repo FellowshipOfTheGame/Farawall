@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Inquisitor : MonoBehaviour {
 
     bool waitAnswer = false;
+	public string nextScene;
     public PuzzleInfo puzzle;
     public string correctMsg, wrongMsg, emptyMsg;
     StatueControl myStatue;
@@ -30,7 +31,7 @@ public class Inquisitor : MonoBehaviour {
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = emptyMsg;
             } else if (Solutioner.chosen.answer == puzzle.answer) {
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = correctMsg;
-				GameManager.loadGameScene ("ProtoFinal");
+				GameManager.loadGameScene (nextScene);
             } else {
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = wrongMsg;
             }
