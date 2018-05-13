@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 114758391231600086}
   - component: {fileID: 114327959052220776}
   m_Layer: 0
-  m_Name: FinalStatue
+  m_Name: InquisitorStatue
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

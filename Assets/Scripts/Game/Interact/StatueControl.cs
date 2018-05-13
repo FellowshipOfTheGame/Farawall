@@ -82,6 +82,8 @@ public class StatueControl : Interactable {
             myBallon = null;
             if (inf != null)
                 inf.checkPuzzle();
+            if (sol != null)
+                sol.send();
         }
     }
 

@@ -14,7 +14,7 @@ public class PuzzleInfo : MonoBehaviour {
     public Door startDoor, endDoor;
     public List<string> infos;
     public List<MinItemP> items;
-    GameObject genInfo;
+    GameObject genInfo, genItem;
     Text counter;
 
 	// Use this for initialization
@@ -25,6 +25,9 @@ public class PuzzleInfo : MonoBehaviour {
         counter = tab.transform.Find("Counter").GetComponent<Text>();
         counter.text = "infos. 0/" + statues.Length;
         items = new List<MinItemP>();
+        itemTab = tab.transform.Find("Itens");
+        if (itemTab != null)
+            genItem = itemTab.GetChild(0).gameObject;
     }
 
     public void AddInfo(string info) {
@@ -36,7 +39,11 @@ public class PuzzleInfo : MonoBehaviour {
     }
 
     public void AddItem(ItemPuzzle item) {
-        Debug.Log("PegouItem");
+        MinItemP temp = Instantiate(genItem, itemTab).GetComponent<MinItemP>();
+        //temp.GetComponent<Image>().sprite = item.art;
+        temp.gameObject.SetActive(true);
+        temp.transform.GetChild(0).GetComponent<Text>().text = item.title;
+        items.Add(temp);
     }
 
     public bool isFull() {

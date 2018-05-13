@@ -7,6 +7,7 @@ public class ItemPuzzle : Interactable {
     public int puzzleID, type;
     public TextMesh namePlace;
     public string title;
+    public Sprite art;
     // Use this for initialization
     void Start () {
         namePlace.text = title;
