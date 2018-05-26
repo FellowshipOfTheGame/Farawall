@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 4553358975635738}
   - component: {fileID: 135415010937838920}
   - component: {fileID: 114376876160531048}
+  - component: {fileID: 114987334979930572}
   m_Layer: 0
   m_Name: Item
   m_TagString: Interactable
@@ -180,7 +181,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 28d7fae882d54c4499f3ffb89ce4d4a8, type: 2}
+  - {fileID: 2100000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -226,7 +227,7 @@ TextMesh:
   m_FontSize: 80
   m_FontStyle: 0
   m_RichText: 0
-  m_Font: {fileID: 12800000, guid: bb932467155763f49877aebe9dc93642, type: 3}
+  m_Font: {fileID: 12800000, guid: 1fb4dcc73d0ed0a4a839bc28ab04a239, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294097952
@@ -242,10 +243,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isItem: 1
-  puzzleID: 0
+  puzzleID: 1
   type: 0
   namePlace: {fileID: 102213264512560050}
-  title: 
+  title: FUNCIONA
+  art: {fileID: 0}
+--- !u!114 &114987334979930572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762593305142092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ceafc5a97f8054db3c03d216ef865e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 1427682511785076, guid: 4bf43c8548f1fb844b40335310df4f9f, type: 2}
+  offset: {x: 0, y: 0, z: 5}
+  canDrop: 1
 --- !u!135 &135415010937838920
 SphereCollider:
   m_ObjectHideFlags: 1

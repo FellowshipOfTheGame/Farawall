@@ -8,37 +8,27 @@ public class Solutioner : MonoBehaviour {
     public string answer;
     public static Solutioner chosen = null;
     public Color chosenColor;
-    public GameObject genSelfMenu;
-    SolutionMenu selfMenu;
+    public ItemPlace[] places;
 
     public void Start() {
-        if (genSelfMenu != null) {
-            selfMenu = Instantiate(genSelfMenu, this.transform).GetComponent<SolutionMenu>();
-            answer = string.Empty;
-            for (int i = 1; i <= selfMenu.obj.Length * GameManager.activedPuzzles[puzzleId].solutions.Length; i++)
-                answer += "-";
-        }
     }
 
+
     public void chooseThis() {
-        if (selfMenu == null) {
-            if (chosen != null) {
-                StatueControl statue = chosen.GetComponent<StatueControl>();
-                chosen.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = statue.offColor;
-                statue.message.SetActive(false);
-            }
-            this.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = chosenColor;
-            chosen = this.GetComponent<Solutioner>();
-        }else {
-            selfMenu.gameObject.SetActive(true);
+        if (chosen != null) {
+            StatueControl statue = chosen.GetComponent<StatueControl>();
+            chosen.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = statue.offColor;
+            statue.message.SetActive(false);
+        }
+        this.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = chosenColor;
+        chosen = this.GetComponent<Solutioner>();
+
+        if (places.Length != 0) {
+            ItemPlace.selected = places[0];
         }
     }
 
     public void send() {
-        foreach (StatueControl s in GameManager.activedPuzzles[puzzleId].solutions) {
-            s.GetComponent<Solutioner>().answer = answer.Substring(0, selfMenu.order * selfMenu.obj.Length) + 
-                selfMenu.obj.ToString() + answer.Substring((selfMenu.order + 1) * selfMenu.obj.Length - 1);
-        }
     }
 
     public void check() {

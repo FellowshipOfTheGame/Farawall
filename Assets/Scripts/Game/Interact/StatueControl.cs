@@ -43,7 +43,11 @@ public class StatueControl : Interactable {
 	
 	// Update is called once per frame
 	void Update () {
+        if(nearPlayer && sol!= null && sol.places.Length > 0) {
+            if (Input.GetKeyDown(KeyCode.RightArrow)) ItemPlace.selected.turnOff(1, false);
 
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) ItemPlace.selected.turnOff(-1, false);
+        }
 	}
 
     public override void Interact() {

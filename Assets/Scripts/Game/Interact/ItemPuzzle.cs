@@ -21,6 +21,10 @@ public class ItemPuzzle : Interactable {
 
     public override void Interact() {
         GameManager.activedPuzzles[puzzleID].AddItem(this);
+        if (GameManager.activedPuzzles[puzzleID].isFull() && GameManager.activedPuzzles[puzzleID].isFull2()) {
+            Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
+            k.door = GameManager.activedPuzzles[puzzleID].endDoor;
+        }
         Close();
     }
 

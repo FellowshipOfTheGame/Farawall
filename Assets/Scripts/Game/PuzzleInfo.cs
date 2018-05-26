@@ -26,8 +26,12 @@ public class PuzzleInfo : MonoBehaviour {
         counter.text = "infos. 0/" + statues.Length;
         items = new List<MinItemP>();
         itemTab = tab.transform.Find("Itens");
-        if (itemTab != null)
+        if (itemTab != null) {
             genItem = itemTab.GetChild(0).gameObject;
+            ItemPlace.globalAnswer = string.Empty;
+            for (int i = 1; i <= itemList.Length / solutions.Length; i++)
+                ItemPlace.globalAnswer += "-";
+        }
     }
 
     public void AddInfo(string info) {
@@ -48,6 +52,10 @@ public class PuzzleInfo : MonoBehaviour {
 
     public bool isFull() {
         return infos.Count == statues.Length;
+    }
+
+    public bool isFull2() {
+        return items.Count == itemList.Length;
     }
 
     public bool checkAnswer(string answer) {

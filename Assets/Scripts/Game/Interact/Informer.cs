@@ -26,7 +26,7 @@ public class Informer : MonoBehaviour {
     }
 
     public void checkPuzzle() {
-		if (GameManager.activedPuzzles[puzzleId].isFull()) {
+		if (GameManager.activedPuzzles[puzzleId].isFull() && GameManager.activedPuzzles[puzzleId].isFull2()) {
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
 			k.door = GameManager.activedPuzzles[puzzleId].endDoor;
         }
