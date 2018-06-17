@@ -180,13 +180,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1634029272073760}
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 1, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4477954476082000}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!4 &4277151176232590
 Transform:
   m_ObjectHideFlags: 1
@@ -499,9 +499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPuzzle: 0
-  correctMsg: 
-  wrongMsg: 
-  emptyMsg: 
 --- !u!114 &114793509476624576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -529,9 +526,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  finalStatue: {fileID: 0}
+  itemList: []
   startDoor: {fileID: 0}
   endDoor: {fileID: 0}
   infos: []
+  items: []
 --- !u!135 &135083465532233334
 SphereCollider:
   m_ObjectHideFlags: 1

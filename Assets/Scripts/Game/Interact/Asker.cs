@@ -7,13 +7,10 @@ public class Asker : MonoBehaviour {
 
     bool isNew = true;
     public bool endPuzzle;
-    PuzzleInfo puzzle;
-//  StatueControl myStatue;
+    public int id;
 
 	// Use this for initialization
 	void Start () {
-//      myStatue = this.GetComponent<StatueControl>();
-        puzzle = this.GetComponent<PuzzleInfo>();
 	}
 
     public void talk() {
@@ -22,9 +19,9 @@ public class Asker : MonoBehaviour {
 
     public void activePuzzle() {
         if (isNew) {
-			GameManager.ActivePuzzle(puzzle);
+			GameManager.instance.ActivePuzzle(id);
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
-            k.door = puzzle.startDoor;
+            k.door = GameManager.instance.activedPuzzles[id].startDoor;
             isNew = false;
         }
     }

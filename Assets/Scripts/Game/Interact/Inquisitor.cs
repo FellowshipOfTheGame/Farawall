@@ -8,7 +8,7 @@ public class Inquisitor : MonoBehaviour {
 
     bool waitAnswer = false;
 	public string nextScene;
-    public PuzzleInfo puzzle;
+    public int id;
     public string correctMsg, wrongMsg, emptyMsg;
     StatueControl myStatue;
 
@@ -22,18 +22,24 @@ public class Inquisitor : MonoBehaviour {
     }
 
     public void getAnswer() {
-        if (!waitAnswer) {
-            for (int i = 0; i < puzzle.solutions.Length; i++)
-                puzzle.solutions[i].locked = false;
+        if (!waitAnswer) { //first time talking to player
+            for (int i = 0; i < GameManager.instance.activedPuzzles[id].solutions.Length; i++) {
+                GameManager.instance.activedPuzzles[id].solutions[i].locked = false; //unlock all solution statues
+                Solutioner s = GameManager.instance.activedPuzzles[id].solutions[i].GetComponent<Solutioner>();
+                if (s.places.Length > 0) {
+                    foreach (ItemPlace ip in s.places) ip.setOp(); //if have itens, set place options
+                }
+            }
             waitAnswer = true;
         } else {
-            if (Solutioner.chosen == null) {
+            if (Solutioner.chosen == null) { //not have answer
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = emptyMsg;
-            } else if (Solutioner.chosen.answer == puzzle.answer) {
+            } else if (Solutioner.chosen.answer == GameManager.instance.activedPuzzles[id].answer) {
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = correctMsg;
 				GameManager.loadGameScene (nextScene);
             } else {
                 myStatue.myBallon.transform.Find("Text").GetComponent<Text>().text = wrongMsg;
+                Debug.Log(Solutioner.chosen.answer);
             }
         }
     }

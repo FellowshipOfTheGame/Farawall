@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour {
 	public bool sceneInGame;
 	public static bool inGame;
 	public static CameraControl mainCam;
+    public Canvas canvas;
 	public static PlayerControl player;
     public static TerminalAccess activedTerminal = null;
 	public static InGameMenu menu;
 	public static bool paused = false;
-	public static List<PuzzleInfo> activedPuzzles;
-
+	public PuzzleInfo[] activedPuzzles;
 
     void Awake() {
         if (instance == null) {
@@ -30,8 +30,14 @@ public class GameManager : MonoBehaviour {
     void Start () {
 		if (inGame) {
 			startGame ();
-
+            loadPuzzles();
 		}
+    }
+
+    void loadPuzzles() {
+        activedPuzzles = new PuzzleInfo[this.transform.GetChild(0).childCount];
+        for (int i = 0; i < activedPuzzles.Length; i++)
+            activedPuzzles[i] = this.transform.GetChild(0).GetChild(i).GetComponent<PuzzleInfo>();
     }
 	
 	// Update is called once per frame
@@ -48,23 +54,24 @@ public class GameManager : MonoBehaviour {
 		}
 		SceneManager.LoadScene(scene, LoadSceneMode.Single);
 		if (previousScene == "Menu") {
-			startGame ();
+			GameManager.instance.startGame ();
 		} else if (scene == "Menu") {
 			endGame ();
 		}
         
     }
 
-    static void startGame() {
-        activedPuzzles = new List<PuzzleInfo>();
+    public void startGame() {
         paused = false;
         inGame = true;
+        //desabilitar todos os puzzles no inicio
+        foreach (PuzzleInfo p in activedPuzzles)
+            p.enabled = false;
     }
 
 	static void endGame(){
 		inGame = false;
 		paused = false;
-		activedPuzzles = null;
 	}
 
 	public static void pausePlay() {
@@ -80,16 +87,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public static void ActivePuzzle(PuzzleInfo p) {
-        if (activedPuzzles.Count == 0)
+    public void ActivePuzzle(int i) {
+        if (i == 0)
             menu.transform.Find("DataTab").Find("Buttons").Find("PuzzleButton").gameObject.SetActive(true);
-
-        p.id = activedPuzzles.Count;
-        activedPuzzles.Add(p);
-        for (int i = 0; i < p.statues.Length; i++)
-            p.statues[i].GetComponent<Informer>().puzzleId = p.id;
-        for (int i = 0; i < p.solutions.Length; i++)
-            p.solutions[i].GetComponent<Solutioner>().puzzleId = p.id;
+        Debug.Log("Puzzle " + i + " actived");
+        activedPuzzles[i].enabled = true;
     }
 
     public static void ShowGameOver() {

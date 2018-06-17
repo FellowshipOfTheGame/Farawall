@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Informer : MonoBehaviour {
 
-    public int puzzleId;
+    public int id;
     string info;
     public bool isNew = true;
 	// Use this for initialization
@@ -20,15 +20,15 @@ public class Informer : MonoBehaviour {
 
     public void sendMessage() {
         if (isNew) {
-			GameManager.activedPuzzles[puzzleId].AddInfo(info);
+			GameManager.instance.activedPuzzles[id].AddInfo(info);
             isNew = false;
         }
     }
 
     public void checkPuzzle() {
-		if (GameManager.activedPuzzles[puzzleId].isFull() && GameManager.activedPuzzles[puzzleId].isFull2()) {
+		if (GameManager.instance.activedPuzzles[id].isFull() && GameManager.instance.activedPuzzles[id].isFull2()) {
             Key k = this.GetComponent<DropItem>().Drop().GetComponent<Key>() as Key;
-			k.door = GameManager.activedPuzzles[puzzleId].endDoor;
+			k.door = GameManager.instance.activedPuzzles[id].endDoor;
         }
     }
 }

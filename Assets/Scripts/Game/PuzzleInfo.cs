@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class PuzzleInfo : MonoBehaviour {
     public int id;
-    public GameObject tab;
-    Transform infoTab, itemTab;
+    public Transform infoTab, itemTab;
+    public GameObject genInfo, genItem;
+    public Text counter;
+    [Space(5)]
     public string intro, answer;
     public StatueControl[] statues, solutions;
     public Inquisitor finalStatue;
@@ -14,22 +16,17 @@ public class PuzzleInfo : MonoBehaviour {
     public Door startDoor, endDoor;
     public List<string> infos;
     public List<MinItemP> items;
-    GameObject genInfo, genItem;
-    Text counter;
 
 	// Use this for initialization
 	void Start () {
         infos = new List<string>();
-        infoTab = tab.transform.Find("Infos");
         genInfo = infoTab.GetChild(0).gameObject;
-        counter = tab.transform.Find("Counter").GetComponent<Text>();
         counter.text = "infos. 0/" + statues.Length;
         items = new List<MinItemP>();
-        itemTab = tab.transform.Find("Itens");
         if (itemTab != null) {
             genItem = itemTab.GetChild(0).gameObject;
             ItemPlace.globalAnswer = string.Empty;
-            for (int i = 1; i <= itemList.Length / solutions.Length; i++)
+            for (int i = 1; i <= itemList.Length; i++)
                 ItemPlace.globalAnswer += "-";
         }
     }
@@ -46,7 +43,7 @@ public class PuzzleInfo : MonoBehaviour {
         MinItemP temp = Instantiate(genItem, itemTab).GetComponent<MinItemP>();
         //temp.GetComponent<Image>().sprite = item.art;
         temp.gameObject.SetActive(true);
-        temp.transform.GetChild(0).GetComponent<Text>().text = item.title;
+        temp.transform.GetChild(0).GetComponent<Text>().text = item.info.title;
         items.Add(temp);
     }
 

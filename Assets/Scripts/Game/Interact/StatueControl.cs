@@ -40,15 +40,6 @@ public class StatueControl : Interactable {
         this.name = data.name;
         message.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if(nearPlayer && sol!= null && sol.places.Length > 0) {
-            if (Input.GetKeyDown(KeyCode.RightArrow)) ItemPlace.selected.turnOff(1, false);
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) ItemPlace.selected.turnOff(-1, false);
-        }
-	}
 
     public override void Interact() {
         if (!locked) {
@@ -93,12 +84,14 @@ public class StatueControl : Interactable {
 
     public override void Near() {
         if (!locked) {
+            nearPlayer = true;
+            /*
 			Vector3 dist = (GameManager.player.transform.position - transform.position).normalized * camDist;
             pivot.position = transform.position + new Vector3(dist.x, camHeight, dist.z);
             float aux = pivot.eulerAngles.x;
             pivot.transform.LookAt(this.transform);
             pivot.eulerAngles = new Vector3(aux, pivot.eulerAngles.y, pivot.eulerAngles.z);
-
+            */
 			Vector3 temp = new Vector3(GameManager.player.transform.position.x - transform.position.x, 0.0f, GameManager.player.transform.position.z - transform.position.z).normalized;
             message.transform.localPosition = temp;
             message.transform.forward = temp;
@@ -112,6 +105,7 @@ public class StatueControl : Interactable {
 
     public override void Away() {
         if (!locked) {
+            nearPlayer = false;
             if (Solutioner.chosen == null || Solutioner.chosen.gameObject != this.gameObject) {
                 message.SetActive(false);
                 this.transform.Find("Model3D").Find("Shine").GetComponent<MeshRenderer>().material.color = offColor;
