@@ -9,13 +9,13 @@ public class BladeMotionTrap : MonoBehaviour {
 	[HideInInspector]
 	public GameObject blade;
 	[HideInInspector]
-	public Vector3 pivot;
+	public Transform pivot;
 	private bool near;
 	private float currentAngle = 0;
 
 	void Start (){
-		pivot = Vector3.up;
-		blade = transform.Find ("Blade").gameObject;
+//		pivot = Vector3.up;
+//		blade = transform.Find ("Blade").gameObject;
 		near = false;
 		if (this.transform.rotation.y != 0)
 			rotated = true;
@@ -23,16 +23,17 @@ public class BladeMotionTrap : MonoBehaviour {
 
 	void Update () {
 		if (near) {
-			blade.transform.position += blade.transform.rotation * pivot;
-			if (rotated){
-				blade.transform.rotation = Quaternion.Euler(currentAngle,90,0);
-			}else
-				blade.transform.rotation = Quaternion.Euler (currentAngle,0,0);
-			blade.transform.position -= blade.transform.rotation * pivot;
+//			blade.transform.position += ancor - pivot;
+			if (rotated)
+//				blade.transform.rotation = Quaternion.Euler(new Vector3(currentAngle,0,0));
+				blade.transform.RotateAround(pivot.position,Vector3.forward,speed*Time.deltaTime);
+			else
+				blade.transform.RotateAround(pivot.position,Vector3.right,speed*Time.deltaTime);
+//			blade.transform.position -= ancor - pivot;
 			if (currentAngle > limitAngle || currentAngle < -limitAngle) {
 				speed *= -1;
 			}
-			currentAngle += speed;
+			currentAngle += speed*Time.deltaTime;
 		}
 	}
 
